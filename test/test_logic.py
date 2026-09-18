@@ -2327,13 +2327,19 @@ class TestCoherence(unittest.TestCase):
         self.assertEqual(set(self.good), covered,
                          "payload keys changed; add a forgery test")
 
-    def test_model_called_is_the_only_field_a_leader_may_choose_freely(self):
-        """And it is deliberately not on the compared axis: it is bookkeeping
-        about HOW the answer was reached, it cannot change a number, and putting
-        it on the axis would make a case fail consensus because one node found
-        the bracket had collapsed to one option and another did not."""
-        self.assertTrue(C._coherent(dict(self.good, model_called=False),
-                                    self.facts))
+    def test_a_forged_model_called_is_refused(self):
+        """It was once the single field a leader could choose freely, on the
+        reasoning that it was bookkeeping and could not move money. That is the
+        rejection pattern regardless — a value the validators did not compare is
+        a value one node chose — and the value turned out to be derivable
+        (`option_count > 1`), so there was no trade to make."""
+        self.assertFalse(C._coherent(dict(self.good, model_called=not self.good["model_called"]),
+                                     self.facts))
+
+    def test_model_called_is_derived_from_the_option_count(self):
+        for i in range(C._derive(self.facts, 0)["option_count"]):
+            out = C._derive(self.facts, i)
+            self.assertEqual(out["model_called"], out["option_count"] > 1)
 
 
 class TestAgreement(unittest.TestCase):
@@ -2383,17 +2389,17 @@ class TestAgreement(unittest.TestCase):
                     "reasoning", "outcome", "quality", "option",
                     "option_count", "rung", "award_bps", "bracket_lo",
                     "bracket_hi", "award_wei", "to_plaintiff_wei",
-                    "to_defendant_wei", "unenforced_wei", "case_id", "dismiss"}
+                    "to_defendant_wei", "unenforced_wei", "case_id", "dismiss",
+                    "model_called"}
         stored_from_verdict = {
             "award_bps", "rung", "award_wei", "quality", "key", "reasoning",
             "content_hash", "signals_csv", "bracket_lo", "bracket_hi",
             "option", "option_count", "dismissible", "model_called",
             "unenforced_wei"}
-        # `dismissible` and `model_called` are the two exceptions and both are
-        # gated by `_coherent` instead, which every validator applies to the
-        # leader's own bytes before it votes.
-        self.assertEqual(stored_from_verdict - compared,
-                         {"dismissible", "model_called"})
+        # `dismissible` is the one exception, and it is gated by `_coherent`
+        # instead — which every validator applies to the leader's own bytes
+        # before it votes, so it is bound just as tightly by a different gate.
+        self.assertEqual(stored_from_verdict - compared, {"dismissible"})
 
     def test_a_tolerance_is_never_applied(self):
         """No near-miss agrees. The tolerance is in the ladder, not in the

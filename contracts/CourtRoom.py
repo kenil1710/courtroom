@@ -881,6 +881,15 @@ def _derive(facts: dict, option: int) -> dict:
         "bracket_lo": lo,
         "bracket_hi": hi,
         "dismissible": _dismissible(sig),
+        # Whether a model was consulted at all is NOT a free value the leader
+        # reports — it is exactly `option_count > 1`, because `_judge_case`
+        # skips the call when the evidence leaves only one verdict. It used to
+        # be carried from the leader's payload and compared by nothing, which
+        # made it the one stored field a leader could forge. It could not change
+        # the money, but "the validators did not compare it" is the whole of the
+        # rejection pattern and there is no reason to leave an instance of it
+        # standing when the value is derivable.
+        "model_called": len(options) > 1,
         "signals": sig,
         "signals_csv": _canon_signals(sig),
         "reasoning": _reason(facts, rung, quality, dismiss, sig),
@@ -947,7 +956,6 @@ def _collect(facts: dict) -> dict:
     # ordering rather than over content.
     del out["signals"]
     out["ok"] = True
-    out["model_called"] = bool(call.get("model"))
     out["case_id"] = _as_int(facts.get("case_id"), 0)
     out["facts_hash"] = _facts_hash(facts)
     return out
@@ -991,6 +999,8 @@ def _coherent(payload: typing.Any, facts: dict) -> bool:
         return False
     if bool(payload.get("dismissible")) != bool(mine.get("dismissible")):
         return False
+    if bool(payload.get("model_called")) != bool(mine.get("model_called")):
+        return False
     # Spelled out again rather than trusted from `mine`: the compared key is the
     # thing the brief names, so it gets its own check against its own inputs.
     return str(payload.get("key", "")) == _verdict_key(
@@ -1026,7 +1036,9 @@ def _agrees(lead: typing.Any, mine: typing.Any) -> bool:
               "to_defendant_wei", "unenforced_wei", "case_id"):
         if _as_int(lead.get(k), -1) != _as_int(mine.get(k), -2):
             return False
-    return bool(lead.get("dismiss")) == bool(mine.get("dismiss"))
+    if bool(lead.get("dismiss")) != bool(mine.get("dismiss")):
+        return False
+    return bool(lead.get("model_called")) == bool(mine.get("model_called"))
 
 
 def _leader_failed(res: typing.Any, facts: dict) -> bool:
@@ -1993,7 +2005,6 @@ class CourtRoom(gl.contract.Contract):
         # index. Every stored field is recomputed here from that index and from
         # text that was on chain before the round began.
         verdict = _derive(facts, _as_int(out.get("option"), 0))
-        verdict["model_called"] = bool(out.get("model_called"))
         self.judging[cid_key] = u64(0)
         case.judged_by = sender
         return self._settle(case, str(verdict["outcome"]), R_VERDICT,
@@ -2419,7 +2430,7 @@ class CourtRoom(gl.contract.Contract):
                 "jury_option", "option_count", "signals_csv", "bracket_lo",
                 "bracket_hi", "content_hash", "facts_hash", "reasoning",
                 "award_wei", "to_plaintiff_wei", "to_defendant_wei",
-                "unenforced_wei"],
+                "unenforced_wei", "dismissible", "model_called"],
             "owner_powers": ["set_filing_fee", "set_paused",
                              "transfer_ownership"],
             "owner_cannot": [

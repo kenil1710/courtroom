@@ -111,7 +111,7 @@ There is a button for it on every decided case.
 contracts/CourtRoom.py             the court           (nine rules at the top)
 contracts/ArbitrationConsumer.py   a marketplace that defers to it
 contracts/NOTES.md                 why it is built this way, and what bit us
-test/test_logic.py                 644 offline tests — no chain, network or model
+test/test_logic.py                 645 offline tests — no chain, network or model
 test/seed.mjs                      creates the demo docket on Studio Dev
 test/audit_chain.mjs               35 assertions against the LIVE contracts
 tools/audit.sh                     47 checks, one per past rejection
@@ -123,7 +123,7 @@ docs/EVIDENCE.md                   what the live run actually produced
 ## Running it
 
 ```bash
-python3 test/test_logic.py         # 644 tests, stdlib only, ~1s
+python3 test/test_logic.py         # 645 tests, stdlib only, ~1s
 ./tools/audit.sh                   # static + offline
 ./tools/audit.sh --chain           # also asserts the live deploy
 
