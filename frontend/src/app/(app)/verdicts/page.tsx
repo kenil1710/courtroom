@@ -33,7 +33,7 @@ export default async function VerdictsPage() {
       </header>
 
       {stats && stats.verdicts_returned > 0 ? (
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-8 gap-y-6 mb-8 pb-7 border-b border-rule">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-8 gap-y-6 mb-8 pb-7 border-b border-[var(--rule)]">
           <Stat value={String(stats.total_settled)} label="Cases decided" />
           <Stat value={`${stats.average_award_pct}%`} label="Average award" />
           <Stat value={`${gen(stats.total_awarded_wei)} GEN`} label="Moved to plaintiffs" />
@@ -60,7 +60,7 @@ function Stat({ value, label }: { value: string; label: string }) {
   return (
     <div>
       <p className="tnum serif text-[1.7rem] leading-none">{value}</p>
-      <p className="mt-1.5 text-[0.84rem] text-ink-3">{label}</p>
+      <p className="mt-1.5 text-[0.84rem] text-ivory-3">{label}</p>
     </div>
   );
 }

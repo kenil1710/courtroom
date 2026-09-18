@@ -332,7 +332,7 @@ export default async function DocsPage() {
             </Faq>
           </Section>
 
-          <div className="mt-10 pt-7 border-t border-rule flex flex-wrap gap-3">
+          <div className="mt-10 pt-7 border-t border-[var(--rule)] flex flex-wrap gap-3">
             <Link href="/file" className="btn btn-primary">File a case</Link>
             <a href={GITHUB} target="_blank" rel="noreferrer noopener" className="btn btn-secondary">
               Read the contract
@@ -342,7 +342,7 @@ export default async function DocsPage() {
 
         <nav className="hidden lg:block lg:sticky lg:top-20 text-[0.86rem]">
           <p className="font-semibold mb-2.5">On this page</p>
-          <ul className="space-y-1.5 text-ink-3">
+          <ul className="space-y-1.5 text-ivory-3">
             {[
               ["start", "Getting started"],
               ["filing", "Filing a case"],
@@ -356,7 +356,7 @@ export default async function DocsPage() {
               ["faq", "Questions"],
             ].map(([id, label]) => (
               <li key={id}>
-                <a href={`#${id}`} className="hover:text-ink">{label}</a>
+                <a href={`#${id}`} className="hover:text-ivory">{label}</a>
               </li>
             ))}
           </ul>
@@ -370,7 +370,7 @@ function Section({ id, title, children }: { id: string; title: string; children:
   return (
     <section id={id} className="scroll-mt-20 mb-10">
       <h2 className="display h3 mb-3">{title}</h2>
-      <div className="prose-court [&_ul]:mt-3 [&_ul]:space-y-2 [&_li]:list-disc [&_ul]:pl-5 [&_code]:text-[0.92em] [&_strong]:text-ink [&_strong]:font-semibold">
+      <div className="prose-court [&_ul]:mt-3 [&_ul]:space-y-2 [&_li]:list-disc [&_ul]:pl-5 [&_code]:text-[0.92em] [&_strong]:text-ivory [&_strong]:font-semibold">
         {children}
       </div>
     </section>
@@ -379,12 +379,12 @@ function Section({ id, title, children }: { id: string; title: string; children:
 
 function Faq({ q, children }: { q: string; children: React.ReactNode }) {
   return (
-    <details className="group border-b border-rule py-3.5">
-      <summary className="cursor-pointer font-medium text-ink list-none flex items-baseline justify-between gap-4">
+    <details className="group border-b border-[var(--rule)] py-3.5">
+      <summary className="cursor-pointer font-medium text-ivory list-none flex items-baseline justify-between gap-4">
         {q}
-        <span className="text-ink-3 text-[1.1rem] leading-none group-open:rotate-45 transition-transform" aria-hidden>+</span>
+        <span className="text-ivory-3 text-[1.1rem] leading-none group-open:rotate-45 transition-transform" aria-hidden>+</span>
       </summary>
-      <div className="mt-2 text-[0.93rem] leading-relaxed text-ink-2">{children}</div>
+      <div className="mt-2 text-[0.93rem] leading-relaxed text-ivory-2">{children}</div>
     </details>
   );
 }

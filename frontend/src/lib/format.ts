@@ -69,7 +69,11 @@ export function relative(epoch: number, now: number): string {
 
 export interface Tone {
   label: string;
+  /** For fills, edges and marks. */
   color: string;
+  /** For TEXT. Crimson at its brand value only reaches 2.8:1 on this
+   *  background, so anything a person has to read uses this instead. */
+  text: string;
   wash: string;
   /** What actually happened to the money, in one line. */
   meaning: string;
@@ -79,24 +83,28 @@ export const OUTCOME_TONE: Record<Exclude<Outcome, "">, Tone> = {
   PLAINTIFF_WINS: {
     label: "Plaintiff wins",
     color: "var(--plaintiff)",
+    text: "var(--plaintiff)",
     wash: "var(--plaintiff-wash)",
     meaning: "The full amount claimed goes to the plaintiff, with the filing fee returned.",
   },
   DEFENDANT_WINS: {
     label: "Defendant wins",
     color: "var(--defendant)",
+    text: "var(--defendant-text)",
     wash: "var(--defendant-wash)",
     meaning: "The bond goes back to the defendant, and the filing fee goes to them too.",
   },
   PARTIAL: {
     label: "Partial award",
     color: "var(--partial)",
+    text: "var(--partial)",
     wash: "var(--partial-wash)",
     meaning: "Part of the claim is awarded; the rest of the bond returns to the defendant.",
   },
   DISMISSED: {
     label: "Dismissed",
     color: "var(--dismissed)",
+    text: "var(--dismissed-text)",
     wash: "var(--dismissed-wash)",
     meaning: "Neither side is found against. Both are made whole.",
   },
@@ -105,37 +113,43 @@ export const OUTCOME_TONE: Record<Exclude<Outcome, "">, Tone> = {
 export const STATUS_TONE: Record<CaseStatus, Tone> = {
   FILED: {
     label: "Awaiting answer",
-    color: "var(--brand)",
-    wash: "var(--brand-wash)",
+    color: "var(--gold-dim)",
+    text: "var(--gold)",
+    wash: "var(--plaintiff-wash)",
     meaning: "The defendant has 48 hours to answer and post a bond.",
   },
   RESPONDED: {
     label: "Ready for the jury",
-    color: "var(--partial)",
-    wash: "var(--partial-wash)",
+    color: "var(--gold)",
+    text: "var(--gold)",
+    wash: "var(--plaintiff-wash)",
     meaning: "Both sides have filed. Anyone can send it to the jury.",
   },
   SETTLED: {
     label: "Settled",
     color: "var(--plaintiff)",
+    text: "var(--plaintiff)",
     wash: "var(--plaintiff-wash)",
     meaning: "Decided and paid out.",
   },
   DEFAULTED: {
     label: "Default judgment",
     color: "var(--partial)",
+    text: "var(--partial)",
     wash: "var(--partial-wash)",
     meaning: "The defendant never answered, so judgment was entered without them.",
   },
   WITHDRAWN: {
     label: "Withdrawn",
     color: "var(--dismissed)",
+    text: "var(--dismissed-text)",
     wash: "var(--dismissed-wash)",
     meaning: "The plaintiff dropped it before any answer. No finding either way.",
   },
   STALLED: {
     label: "Stalled",
     color: "var(--dismissed)",
+    text: "var(--dismissed-text)",
     wash: "var(--dismissed-wash)",
     meaning: "The jury round never settled. Both sides were refunded in full.",
   },

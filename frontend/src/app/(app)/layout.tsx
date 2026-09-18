@@ -1,7 +1,8 @@
-import Link from "next/link";
 import { WalletProvider } from "@/lib/wallet";
 import { WalletBadge } from "@/components/wallet-badge";
-import { NetworkBadge, SiteFooter, Wordmark } from "@/components/chrome";
+import { AppNav, AppNavMobile, NetworkBadge, SiteFooter, Wordmark } from "@/components/chrome";
+import { Motion, PageTransition } from "@/components/motion";
+import { ScalesDefs } from "@/components/scales";
 import { Shell } from "@/components/ui";
 
 /**
@@ -13,31 +14,28 @@ import { Shell } from "@/components/ui";
  */
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
-    <WalletProvider>
-      <header className="border-b border-rule bg-paper/85 backdrop-blur-sm sticky top-0 z-30">
-        <Shell className="flex h-14 items-center gap-4">
-          <Wordmark />
-          <nav className="hidden sm:flex items-center gap-0.5 text-[0.9rem] ml-2">
-            <Link href="/file" className="btn btn-ghost !px-3">File</Link>
-            <Link href="/cases" className="btn btn-ghost !px-3">Cases</Link>
-            <Link href="/verdicts" className="btn btn-ghost !px-3">Verdicts</Link>
-            <Link href="/docs" className="btn btn-ghost !px-3">Docs</Link>
-          </nav>
-          <div className="ml-auto flex items-center gap-2.5">
-            <span className="hidden sm:inline-flex"><NetworkBadge /></span>
-            <WalletBadge />
-          </div>
-        </Shell>
-        <nav className="sm:hidden flex items-center gap-0.5 px-4 pb-2 text-[0.88rem] overflow-x-auto">
-          <Link href="/file" className="btn btn-ghost !px-2.5 !py-1.5">File</Link>
-          <Link href="/cases" className="btn btn-ghost !px-2.5 !py-1.5">Cases</Link>
-          <Link href="/verdicts" className="btn btn-ghost !px-2.5 !py-1.5">Verdicts</Link>
-          <Link href="/docs" className="btn btn-ghost !px-2.5 !py-1.5">Docs</Link>
-          <span className="ml-auto shrink-0"><NetworkBadge /></span>
-        </nav>
-      </header>
-      <main className="py-8 sm:py-12">{children}</main>
-      <SiteFooter />
-    </WalletProvider>
+    <Motion>
+      <WalletProvider>
+        <ScalesDefs />
+        <header
+          className="sticky top-0 z-30 border-b backdrop-blur-md"
+          style={{ borderColor: "var(--rule)", background: "rgba(26, 26, 46, 0.86)" }}
+        >
+          <Shell className="flex h-16 items-center gap-4">
+            <Wordmark />
+            <AppNav />
+            <div className="ml-auto flex items-center gap-2.5">
+              <span className="hidden sm:inline-flex"><NetworkBadge /></span>
+              <WalletBadge />
+            </div>
+          </Shell>
+          <AppNavMobile />
+        </header>
+        <main className="py-8 sm:py-12">
+          <PageTransition>{children}</PageTransition>
+        </main>
+        <SiteFooter />
+      </WalletProvider>
+    </Motion>
   );
 }

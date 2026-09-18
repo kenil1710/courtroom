@@ -37,10 +37,10 @@ export function VerifyPanel({ caseId }: { caseId: number }) {
   return (
     <div className="card p-5">
       <div className="flex items-center gap-2">
-        <BadgeCheck size={16} strokeWidth={1.9} className="text-brand" aria-hidden />
+        <BadgeCheck size={16} strokeWidth={1.9} className="text-gold" aria-hidden />
         <h2 className="font-semibold text-[0.95rem]">Check this verdict yourself</h2>
       </div>
-      <p className="mt-1.5 text-[0.84rem] text-ink-3 leading-relaxed">
+      <p className="mt-1.5 text-[0.84rem] text-ivory-3 leading-relaxed">
         Re-derives the outcome, the percentage, the settlement and the written
         judgment from the filings as stored, and compares them to what the court
         recorded.
@@ -57,7 +57,7 @@ export function VerifyPanel({ caseId }: { caseId: number }) {
       </button>
 
       {state === "error" ? (
-        <p className="mt-3 text-[0.85rem] text-defendant">
+        <p className="mt-3 text-[0.85rem] text-[var(--defendant-text)]">
           The court did not answer. This is usually the testnet RPC being busy —
           try again in a moment.
         </p>
@@ -66,7 +66,7 @@ export function VerifyPanel({ caseId }: { caseId: number }) {
       {state === "done" && result ? (
         <div className="mt-4">
           {!result.verifiable ? (
-            <p className="text-[0.88rem] text-ink-2">{result.reason}</p>
+            <p className="text-[0.88rem] text-ivory-2">{result.reason}</p>
           ) : (
             <>
               <p
@@ -77,7 +77,7 @@ export function VerifyPanel({ caseId }: { caseId: number }) {
                   ? <><BadgeCheck size={16} aria-hidden /> Everything matches</>
                   : <><ShieldAlert size={16} aria-hidden /> Something does not match</>}
               </p>
-              <p className="mt-1 text-[0.84rem] text-ink-3">
+              <p className="mt-1 text-[0.84rem] text-ivory-3">
                 {result.decided_by === "contract"
                   ? "Settled by rule rather than by jury, so there is no jury choice to re-derive — the commitment to the evidence is checked instead."
                   : `${checks.filter(([, v]) => v).length} of ${checks.length} checks passed.`}
@@ -98,7 +98,7 @@ export function VerifyPanel({ caseId }: { caseId: number }) {
                     <ul className="mt-2.5 space-y-1.5">
                       {checks.map(([name, ok]) => (
                         <li key={name} className="flex items-baseline justify-between gap-3 text-[0.84rem]">
-                          <span className="text-ink-2">{humanCheck(name)}</span>
+                          <span className="text-ivory-2">{humanCheck(name)}</span>
                           <span style={{ color: ok ? "var(--plaintiff)" : "var(--defendant)" }} className="font-semibold shrink-0">
                             {ok ? "matches" : "differs"}
                           </span>

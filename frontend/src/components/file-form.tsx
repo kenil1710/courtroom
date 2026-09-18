@@ -170,7 +170,7 @@ export function FileForm({ config }: Props) {
   }
 
   if (!ready) {
-    return <div className="card p-8 text-center text-ink-3">Loading…</div>;
+    return <div className="card p-8 text-center text-ivory-3">Loading…</div>;
   }
 
   return (
@@ -240,7 +240,7 @@ export function FileForm({ config }: Props) {
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
             />
-            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[0.85rem] text-ink-3">GEN</span>
+            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[0.85rem] text-ivory-3">GEN</span>
           </div>
         </Field>
 
@@ -254,12 +254,12 @@ export function FileForm({ config }: Props) {
           </div>
         ) : null}
 
-        <div className="mt-6 pt-5 border-t border-rule">
+        <div className="mt-6 pt-5 border-t border-[var(--rule)]">
           <div className="flex items-baseline justify-between text-[0.9rem]">
-            <span className="text-ink-2">Filing fee, payable now</span>
+            <span className="text-ivory-2">Filing fee, payable now</span>
             <span className="tnum font-semibold">{gen(config.filing_fee_wei)} GEN</span>
           </div>
-          <p className="mt-1.5 text-[0.84rem] text-ink-3 leading-relaxed">
+          <p className="mt-1.5 text-[0.84rem] text-ivory-3 leading-relaxed">
             Returned to you unless the defendant wins, in which case it goes to
             them. This court keeps none of it either way.
           </p>
@@ -275,7 +275,7 @@ export function FileForm({ config }: Props) {
                 {funding ? <Loader2 size={15} className="animate-spin" /> : <Coins size={15} />}
                 {funding ? "Asking the faucet…" : "Get test GEN to cover the fee"}
               </button>
-              <p className="mt-2 text-[0.82rem] text-ink-3 text-center">
+              <p className="mt-2 text-[0.82rem] text-ivory-3 text-center">
                 You have {gen(balanceWei.toString())} GEN and need {gen(config.filing_fee_wei)}.
               </p>
             </>
@@ -292,8 +292,8 @@ export function FileForm({ config }: Props) {
             <Notice tone={result.ok ? "info" : "bad"} title={result.ok ? "Filed" : "Not filed"}>
               <p className="flex items-start gap-2">
                 {result.ok
-                  ? <CheckCircle2 size={15} className="mt-0.5 shrink-0 text-plaintiff" aria-hidden />
-                  : <AlertCircle size={15} className="mt-0.5 shrink-0 text-defendant" aria-hidden />}
+                  ? <CheckCircle2 size={15} className="mt-0.5 shrink-0 text-[var(--plaintiff)]" aria-hidden />
+                  : <AlertCircle size={15} className="mt-0.5 shrink-0 text-[var(--defendant-text)]" aria-hidden />}
                 <span>{result.text}</span>
               </p>
               <div className="mt-2 flex flex-wrap gap-4 text-[0.84rem]">
@@ -325,9 +325,9 @@ function Field({
     <label className="block mt-5 first:mt-0">
       <span className="flex items-baseline justify-between gap-3">
         <span className="font-semibold text-[0.94rem]">{label}</span>
-        {count ? <span className="tnum text-[0.76rem] text-ink-3">{count}</span> : null}
+        {count ? <span className="tnum text-[0.76rem] text-ivory-3">{count}</span> : null}
       </span>
-      {hint ? <span className="block mt-0.5 mb-2 text-[0.84rem] text-ink-3 leading-snug">{hint}</span> : <span className="block mb-2" />}
+      {hint ? <span className="block mt-0.5 mb-2 text-[0.84rem] text-ivory-3 leading-snug">{hint}</span> : <span className="block mb-2" />}
       {children}
     </label>
   );
@@ -346,17 +346,17 @@ function PreviewPanel({ preview, busy, amount }: { preview: Preview | null; busy
   return (
     <aside className="card p-5 lg:sticky lg:top-20">
       <div className="flex items-center gap-2">
-        <Scale size={16} strokeWidth={1.9} className="text-brand" aria-hidden />
+        <Scale size={16} strokeWidth={1.9} className="text-gold" aria-hidden />
         <h2 className="font-semibold text-[0.95rem]">What your evidence supports</h2>
       </div>
-      <p className="mt-1.5 text-[0.84rem] text-ink-3 leading-relaxed">
+      <p className="mt-1.5 text-[0.84rem] text-ivory-3 leading-relaxed">
         The court scores how checkable each side&rsquo;s filing is and fixes the
         range a jury may award within. This is that range, computed from what you
         have written so far.
       </p>
 
       {!preview ? (
-        <p className="mt-5 text-[0.86rem] text-ink-3">
+        <p className="mt-5 text-[0.86rem] text-ivory-3">
           {busy ? "Reading your filing…" : "Start writing your claim and evidence and the range appears here."}
         </p>
       ) : (
@@ -364,34 +364,34 @@ function PreviewPanel({ preview, busy, amount }: { preview: Preview | null; busy
           <div className="mt-5">
             <p className="tnum serif text-[2rem] leading-none">
               {preview.bracket_pct[0]}–{preview.bracket_pct[1]}
-              <span className="text-[0.55em] text-ink-3 ml-0.5">%</span>
+              <span className="text-[0.55em] text-ivory-3 ml-0.5">%</span>
             </p>
-            <p className="mt-1 text-[0.84rem] text-ink-3">
+            <p className="mt-1 text-[0.84rem] text-ivory-3">
               of the amount you claim, if the defendant files nothing stronger
             </p>
           </div>
 
           {wei ? (
-            <p className="mt-3 text-[0.88rem] text-ink-2">
+            <p className="mt-3 text-[0.88rem] text-ivory-2">
               On {gen(wei)} GEN that is{" "}
-              <span className="tnum font-semibold text-ink">
+              <span className="tnum font-semibold text-ivory">
                 {gen(((BigInt(wei) * BigInt(preview.bracket_pct[0] * 100)) / 10000n).toString())}
               </span>
               {" – "}
-              <span className="tnum font-semibold text-ink">
+              <span className="tnum font-semibold text-ivory">
                 {gen(((BigInt(wei) * BigInt(preview.bracket_pct[1] * 100)) / 10000n).toString())}
               </span>{" "}
               GEN.
             </p>
           ) : null}
 
-          <dl className="mt-5 pt-4 border-t border-rule space-y-2.5 text-[0.85rem]">
+          <dl className="mt-5 pt-4 border-t border-[var(--rule)] space-y-2.5 text-[0.85rem]">
             <div className="flex items-baseline justify-between gap-3">
-              <dt className="text-ink-3">How checkable your filing is</dt>
+              <dt className="text-ivory-3">How checkable your filing is</dt>
               <dd className="tnum font-semibold">{preview.plaintiff_specificity} / 7</dd>
             </div>
             <div className="flex items-baseline justify-between gap-3">
-              <dt className="text-ink-3">Verdicts this leaves open</dt>
+              <dt className="text-ivory-3">Verdicts this leaves open</dt>
               <dd className="tnum font-semibold">{preview.options.length}</dd>
             </div>
           </dl>
@@ -405,13 +405,13 @@ function PreviewPanel({ preview, busy, amount }: { preview: Preview | null; busy
               </Notice>
             </div>
           ) : preview.bracket_pct[1] < 100 ? (
-            <p className="mt-4 text-[0.84rem] text-ink-3 leading-relaxed">
+            <p className="mt-4 text-[0.84rem] text-ivory-3 leading-relaxed">
               To reach a full award you need a filing that is markedly more
               specific than the answer you expect: dates, amounts, and documents
               somebody else could look at.
             </p>
           ) : (
-            <p className="mt-4 text-[0.84rem] text-ink-3 leading-relaxed">
+            <p className="mt-4 text-[0.84rem] text-ivory-3 leading-relaxed">
               A full award is within reach on this evidence. A well-documented
               answer from the defendant will narrow it.
             </p>

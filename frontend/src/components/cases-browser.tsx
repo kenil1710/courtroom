@@ -82,7 +82,7 @@ export function CasesBrowser({ cases }: { cases: CaseCard[] }) {
               }`}
             >
               {f.label}
-              <span className={`tnum text-[0.78rem] ${filter === f.id ? "opacity-80" : "text-ink-3"}`}>
+              <span className={`tnum text-[0.78rem] ${filter === f.id ? "opacity-80" : "text-ivory-3"}`}>
                 {counts[f.id]}
               </span>
             </button>
@@ -90,7 +90,7 @@ export function CasesBrowser({ cases }: { cases: CaseCard[] }) {
         </div>
 
         <div className="relative ml-auto w-full sm:w-auto sm:min-w-[16rem]">
-          <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-3" aria-hidden />
+          <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-ivory-3" aria-hidden />
           <input
             className="field pl-9 pr-8 !py-2 text-[0.88rem]"
             placeholder="Case number, address, or words"
@@ -102,7 +102,7 @@ export function CasesBrowser({ cases }: { cases: CaseCard[] }) {
             <button
               type="button"
               onClick={() => setQ("")}
-              className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-ink-3 hover:text-ink"
+              className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-ivory-3 hover:text-ivory"
               aria-label="Clear search"
             >
               <X size={14} />
@@ -110,7 +110,7 @@ export function CasesBrowser({ cases }: { cases: CaseCard[] }) {
           ) : null}
         </div>
 
-        <label className="flex items-center gap-2 text-[0.85rem] text-ink-3">
+        <label className="flex items-center gap-2 text-[0.85rem] text-ivory-3">
           Sort
           <select
             className="field !py-1.5 !px-2 text-[0.85rem] w-auto"
@@ -137,7 +137,7 @@ export function CasesBrowser({ cases }: { cases: CaseCard[] }) {
         </div>
       )}
 
-      <p className="mt-5 text-[0.82rem] text-ink-3">
+      <p className="mt-5 text-[0.82rem] text-ivory-3">
         Showing {shown.length} of {cases.length} cases on the docket.
       </p>
     </>

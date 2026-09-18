@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="CourtRoom">
+  <title>CourtRoom</title>
+  <!--
+    Scales of justice, drawn rather than borrowed.
+
+    The beam is level and the two pans hang at exactly the same height, which is
+    the whole claim this court makes: neither side is favoured by the machine. A
+    tilted pair of scales would be a prettier mark and a worse one.
+
+    `gradientUnits="userSpaceOnUse"` is load-bearing, not a preference. The
+    default, objectBoundingBox, is degenerate on a shape with no area — so a
+    horizontal rule like the beam or the base has a zero-height box and DOES NOT
+    PAINT AT ALL. The first version of this mark rendered as two floating pans
+    and a dot, with no error anywhere.
+  -->
+  <defs>
+    <linearGradient id="cr-gold" gradientUnits="userSpaceOnUse"
+                    x1="32" y1="4" x2="32" y2="58">
+      <stop offset="0" stop-color="#FFDD84"/>
+      <stop offset="0.55" stop-color="#F0C14B"/>
+      <stop offset="1" stop-color="#C9962C"/>
+    </linearGradient>
+  </defs>
+
+  <g stroke="url(#cr-gold)" fill="none" stroke-width="3"
+     stroke-linecap="round" stroke-linejoin="round">
+    <!-- column, and the base it stands on -->
+    <path d="M32 15v33"/>
+    <path d="M24 52h16"/>
+    <path d="M27.5 48h9"/>
+    <!-- the beam, level -->
+    <path d="M13 21h38"/>
+    <!-- the cords, and the two pans hanging level with each other -->
+    <path d="M13 21v6"/>
+    <path d="M51 21v6"/>
+    <path d="M5.5 27.5h15a7.5 7.5 0 0 1-15 0Z"/>
+    <path d="M43.5 27.5h15a7.5 7.5 0 0 1-15 0Z"/>
+  </g>
+
+  <!-- the finial at the top of the column -->
+  <circle cx="32" cy="12" r="3.6" fill="url(#cr-gold)"/>
+</svg>

@@ -1,164 +1,208 @@
 @import "tailwindcss";
 
 /*
- * CourtRoom.
+ * CourtRoom — a dark court.
  *
- * The palette is the brief's, exactly. The rest of the system is built around
- * one idea taken from the subject: a dispute has TWO SIDES and a RECORD, so the
- * structural devices are an adversarial split rule and a coloured file edge —
- * not a badge on everything and a shadow under everything.
+ * The room, not the paperwork: deep charcoal, navy benches, and gold for the
+ * things that carry authority. Ivory rather than white for text, because pure
+ * white on near-black is a glare, and a page somebody reads a long filing on
+ * should not be one.
  *
- * Type: Newsreader for the record (case captions, judgments, headlines) and
- * Public Sans for the interface. Public Sans is not an aesthetic default here —
- * it was drawn for public-sector interfaces, which is what a court is.
+ * Gold is reserved. It marks the interactive and the decided, and nothing else,
+ * so that when a verdict lands it is the brightest thing on the page.
+ *
+ * Every text colour below was checked for contrast against #1A1A2E. Crimson at
+ * its brand value (#DC143C) only reaches 2.8:1 and is used for FILLS AND EDGES
+ * only; text that has to be read uses --defendant-text at 5.1:1.
  */
 
 :root {
-  --paper: #fafaf9;          /* warm off-white, the page */
-  --card: #ffffff;           /* the filing itself */
-  --ink: #1c1917;            /* stone-900 */
-  --ink-2: #44403c;          /* stone-700, secondary text */
-  --ink-3: #78716c;          /* stone-500, metadata */
-  --rule: #e7e5e4;           /* stone-200, hairlines */
-  --rule-strong: #d6d3d1;    /* stone-300 */
-  --brand: #1e40af;          /* deep blue, the court itself */
-  --brand-ink: #1e3a8a;
-  --brand-wash: #eff6ff;
+  --bg: #1a1a2e;             /* deep charcoal — the room */
+  --bg-deep: #141426;        /* recessed panels, the footer */
+  --card: #16213e;           /* dark navy — the bench */
+  --card-raised: #1c2a4d;    /* a card that is being hovered */
 
-  --plaintiff: #059669;      /* emerald */
-  --defendant: #e11d48;      /* rose */
-  --partial: #d97706;        /* amber */
-  --dismissed: #64748b;      /* slate */
+  --gold: #f0c14b;           /* the gavel */
+  --gold-bright: #ffd76e;
+  --gold-dim: #a8873a;
+  --gold-glow: rgba(240, 193, 75, 0.18);
 
-  --plaintiff-wash: #ecfdf5;
-  --defendant-wash: #fff1f2;
-  --partial-wash: #fffbeb;
-  --dismissed-wash: #f8fafc;
+  --ivory: #e8d5b7;          /* body text */
+  --ivory-2: rgba(232, 213, 183, 0.74);
+  --ivory-3: rgba(232, 213, 183, 0.5);
 
-  --shadow-card: 0 1px 2px rgba(28, 25, 23, 0.04), 0 1px 3px rgba(28, 25, 23, 0.06);
-  --shadow-lift: 0 2px 4px rgba(28, 25, 23, 0.04), 0 8px 24px rgba(28, 25, 23, 0.08);
+  --rule: rgba(240, 193, 75, 0.14);
+  --rule-strong: rgba(240, 193, 75, 0.3);
+  --rule-cool: rgba(232, 213, 183, 0.1);
+
+  --plaintiff: #f0c14b;      /* bright gold */
+  --defendant: #dc143c;      /* crimson — fills and edges only */
+  --defendant-text: #ff5c78; /* the readable crimson */
+  --partial: #c0c0c0;        /* silver */
+  --dismissed: #6b7280;      /* muted grey — fills */
+  --dismissed-text: #9ca3af; /* the readable grey */
+
+  --plaintiff-wash: rgba(240, 193, 75, 0.09);
+  --defendant-wash: rgba(220, 20, 60, 0.11);
+  --partial-wash: rgba(192, 192, 192, 0.08);
+  --dismissed-wash: rgba(107, 114, 128, 0.12);
+
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.28);
+  --shadow-gold: 0 0 0 1px rgba(240, 193, 75, 0.34), 0 8px 30px rgba(240, 193, 75, 0.1);
 }
 
 @theme inline {
-  --color-paper: var(--paper);
+  --color-bg: var(--bg);
+  --color-bg-deep: var(--bg-deep);
   --color-card: var(--card);
-  --color-ink: var(--ink);
-  --color-ink-2: var(--ink-2);
-  --color-ink-3: var(--ink-3);
+  --color-gold: var(--gold);
+  --color-gold-bright: var(--gold-bright);
+  --color-gold-dim: var(--gold-dim);
+  --color-ivory: var(--ivory);
+  --color-ivory-2: var(--ivory-2);
+  --color-ivory-3: var(--ivory-3);
   --color-rule: var(--rule);
   --color-rule-strong: var(--rule-strong);
-  --color-brand: var(--brand);
-  --color-brand-ink: var(--brand-ink);
-  --color-brand-wash: var(--brand-wash);
   --color-plaintiff: var(--plaintiff);
   --color-defendant: var(--defendant);
+  --color-defendant-text: var(--defendant-text);
   --color-partial: var(--partial);
   --color-dismissed: var(--dismissed);
   --font-sans: var(--font-public-sans), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-newsreader), ui-serif, Georgia, serif;
 }
 
-* {
-  border-color: var(--rule);
-}
-
-html {
-  -webkit-text-size-adjust: 100%;
-}
+* { border-color: var(--rule); }
+html { -webkit-text-size-adjust: 100%; color-scheme: dark; }
 
 body {
-  background: var(--paper);
-  color: var(--ink);
+  background: var(--bg);
+  color: var(--ivory);
   font-family: var(--font-sans);
-  font-feature-settings: "kern" 1;
   -webkit-font-smoothing: antialiased;
+  /*
+   * The room has a floor. A faint gold grid fading out below the fold gives the
+   * dark a sense of depth without being a decoration anyone has to look at, and
+   * it is a background-image rather than elements so it costs nothing and
+   * cannot trap focus or be read out by a screen reader.
+   */
+  background-image:
+    linear-gradient(var(--rule-cool) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule-cool) 1px, transparent 1px);
+  background-size: 64px 64px, 64px 64px;
+  background-position: -1px -1px, -1px -1px;
+  background-attachment: fixed;
 }
 
-/* Money and case numbers are read in columns and compared to each other, so
-   they get tabular figures everywhere. A ledger whose digits do not line up is
-   a ledger nobody checks. */
-.tnum {
-  font-variant-numeric: tabular-nums;
-  font-feature-settings: "tnum" 1;
+/* A gold wash behind the top of the page — the light over the bench. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 70vh;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(60% 55% at 72% 0%, rgba(240, 193, 75, 0.09), transparent 70%),
+    radial-gradient(70% 50% at 10% 0%, rgba(30, 64, 175, 0.12), transparent 70%);
 }
+body > * { position: relative; z-index: 1; }
 
-.serif {
-  font-family: var(--font-serif);
-  font-optical-sizing: auto;
-}
+.tnum { font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1; }
+.serif { font-family: var(--font-serif); font-optical-sizing: auto; }
 
-/* --- type scale ---------------------------------------------------------- */
+/* --- type ---------------------------------------------------------------- */
 
 .display {
   font-family: var(--font-serif);
   font-weight: 400;
-  letter-spacing: -0.021em;
-  line-height: 1.04;
+  letter-spacing: -0.022em;
+  line-height: 1.05;
+  color: var(--ivory);
 }
-
-.h1 { font-size: clamp(2.25rem, 1.4rem + 3.6vw, 4.25rem); }
-.h2 { font-size: clamp(1.6rem, 1.15rem + 1.9vw, 2.5rem); }
-.h3 { font-size: clamp(1.2rem, 1.05rem + 0.7vw, 1.55rem); }
+.h1 { font-size: clamp(2.5rem, 1.4rem + 4.4vw, 5rem); }
+.h2 { font-size: clamp(1.7rem, 1.15rem + 2.1vw, 2.7rem); }
+.h3 { font-size: clamp(1.2rem, 1.05rem + 0.75vw, 1.6rem); }
 
 .lede {
-  font-size: clamp(1.02rem, 0.97rem + 0.28vw, 1.2rem);
-  line-height: 1.6;
-  color: var(--ink-2);
-  max-width: 62ch;
+  font-size: clamp(1.04rem, 0.98rem + 0.3vw, 1.22rem);
+  line-height: 1.62;
+  color: var(--ivory-2);
+  max-width: 60ch;
 }
 
-.prose-court {
-  max-width: 68ch;
-  line-height: 1.68;
-  color: var(--ink-2);
-}
+.prose-court { max-width: 68ch; line-height: 1.7; color: var(--ivory-2); }
 .prose-court p + p { margin-top: 1rem; }
+.prose-court strong { color: var(--ivory); font-weight: 600; }
+.prose-court code { color: var(--gold); font-size: 0.92em; }
+
+/* A filing reads like a filing: serif, generously leaded, and indented off a
+   gold rule the way a quoted exhibit is set in a legal document. */
+.filing {
+  font-family: var(--font-serif);
+  font-size: 1.02rem;
+  line-height: 1.68;
+  color: var(--ivory-2);
+  padding-left: 1rem;
+  border-left: 2px solid var(--rule-strong);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
 
 /* --- the file edge ------------------------------------------------------- */
-/* A record in a docket is keyed by a coloured edge, the way a tabbed legal file
-   is. It carries the outcome without spending a badge on every row. */
 
-.file-edge {
-  position: relative;
-  padding-left: 1rem;
-}
+.file-edge { position: relative; padding-left: 1rem; }
 .file-edge::before {
   content: "";
   position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
+  left: 0; top: 0; bottom: 0;
   width: 3px;
   border-radius: 999px;
   background: var(--edge, var(--rule-strong));
+  box-shadow: 0 0 12px -2px var(--edge, transparent);
 }
 
 /* --- the adversarial rule ------------------------------------------------ */
-/* The vertical line between the two sides of the room. It is the information
-   architecture of a dispute, so it is a real element rather than a border
-   utility scattered across components. */
 
-.split {
-  display: grid;
-  gap: 0;
-  grid-template-columns: 1fr;
-}
+.split { display: grid; gap: 0; grid-template-columns: 1fr; }
 @media (min-width: 900px) {
-  .split {
-    grid-template-columns: 1fr 1px 1fr;
-  }
+  .split { grid-template-columns: 1fr 1px 1fr; }
   .split > .split-rule {
     background: linear-gradient(
-      to bottom,
-      transparent,
-      var(--rule-strong) 12%,
-      var(--rule-strong) 88%,
-      transparent
-    );
+      to bottom, transparent, var(--rule-strong) 14%,
+      var(--rule-strong) 86%, transparent);
   }
 }
 .split-rule { display: none; }
 @media (min-width: 900px) { .split-rule { display: block; } }
+
+/* --- surfaces ------------------------------------------------------------ */
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  box-shadow: var(--shadow-card);
+}
+
+/* A card that is also a link lifts under the pointer and takes a gold edge.
+   Transform is on a wrapper-free element with will-change omitted deliberately:
+   six rows lifting at once is cheaper than six promoted layers. */
+.card-link {
+  transition: transform 180ms cubic-bezier(0.22, 0.61, 0.36, 1),
+              border-color 180ms ease, box-shadow 180ms ease,
+              background-color 180ms ease;
+}
+.card-link:hover {
+  transform: translateY(-2px);
+  border-color: var(--rule-strong);
+  background: var(--card-raised);
+  box-shadow: var(--shadow-gold);
+}
+.card-link:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
 
 /* --- controls ------------------------------------------------------------ */
 
@@ -167,62 +211,70 @@ body {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  border-radius: 7px;
-  font-weight: 560;
+  border-radius: 8px;
+  font-weight: 600;
   font-size: 0.925rem;
   line-height: 1;
-  padding: 0.72rem 1.1rem;
-  transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease;
+  padding: 0.75rem 1.15rem;
   cursor: pointer;
   border: 1px solid transparent;
   text-align: center;
+  transition: background-color 150ms ease, border-color 150ms ease,
+              color 150ms ease, box-shadow 150ms ease, transform 150ms ease;
 }
-.btn:focus-visible {
-  outline: 2px solid var(--brand);
-  outline-offset: 2px;
+.btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+.btn-primary {
+  background: var(--gold);
+  color: #1a1a2e;
+  box-shadow: 0 0 0 1px rgba(240, 193, 75, 0.5), 0 4px 18px -6px var(--gold);
 }
-.btn-primary { background: var(--brand); color: #fff; }
-.btn-primary:hover:not(:disabled) { background: var(--brand-ink); }
+.btn-primary:hover:not(:disabled) {
+  background: var(--gold-bright);
+  box-shadow: 0 0 0 1px var(--gold-bright), 0 6px 26px -6px var(--gold);
+  transform: translateY(-1px);
+}
+
 .btn-secondary {
-  background: var(--card);
-  color: var(--ink);
+  background: transparent;
+  color: var(--ivory);
   border-color: var(--rule-strong);
 }
-.btn-secondary:hover:not(:disabled) { border-color: var(--ink-3); }
-.btn-ghost { background: transparent; color: var(--brand); }
-.btn-ghost:hover:not(:disabled) { background: var(--brand-wash); }
-.btn:disabled { opacity: 0.5; cursor: not-allowed; }
-
-.card {
-  background: var(--card);
-  border: 1px solid var(--rule);
-  border-radius: 10px;
-  box-shadow: var(--shadow-card);
+.btn-secondary:hover:not(:disabled) {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: var(--gold-glow);
 }
+
+.btn-ghost { background: transparent; color: var(--ivory-2); }
+.btn-ghost:hover:not(:disabled) { color: var(--gold); background: var(--gold-glow); }
 
 .field {
   width: 100%;
-  background: var(--card);
+  background: rgba(10, 12, 26, 0.6);
   border: 1px solid var(--rule-strong);
-  border-radius: 7px;
-  padding: 0.7rem 0.8rem;
+  border-radius: 8px;
+  padding: 0.72rem 0.85rem;
   font-size: 0.95rem;
-  color: var(--ink);
+  color: var(--ivory);
   font-family: inherit;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
 }
 .field:focus {
-  outline: 2px solid var(--brand);
-  outline-offset: -1px;
-  border-color: var(--brand);
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px var(--gold-glow);
 }
-.field::placeholder { color: #a8a29e; }
+.field::placeholder { color: rgba(232, 213, 183, 0.32); }
+select.field option { background: var(--card); color: var(--ivory); }
 
 .badge {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
   border-radius: 999px;
-  padding: 0.22rem 0.6rem;
+  padding: 0.24rem 0.65rem;
   font-size: 0.775rem;
   font-weight: 600;
   line-height: 1.3;
@@ -231,12 +283,13 @@ body {
 }
 
 .link-quiet {
-  color: var(--ink-2);
+  color: var(--ivory-2);
   text-decoration: underline;
   text-decoration-color: var(--rule-strong);
   text-underline-offset: 3px;
+  transition: color 140ms ease, text-decoration-color 140ms ease;
 }
-.link-quiet:hover { color: var(--ink); text-decoration-color: var(--ink-3); }
+.link-quiet:hover { color: var(--gold); text-decoration-color: var(--gold); }
 
 .mono-addr {
   font-family: ui-monospace, "SF Mono", Menlo, monospace;
@@ -244,40 +297,105 @@ body {
   letter-spacing: -0.01em;
 }
 
-/* Nothing on this page moves unless a person asked it to, with one exception:
-   the verdict bar on a case that has been decided. That exception respects
-   this. */
+/* --- scroll reveal ------------------------------------------------------- */
+/*
+ * CSS, driven by an IntersectionObserver that only ever ADDS a class.
+ *
+ * This is deliberately not framer-motion. On this version a motion `initial`
+ * is serialised into the server's HTML, so a component that never receives its
+ * animate step renders at `opacity: 0` — content stranded invisible, with no
+ * error anywhere. Here the base state is VISIBLE and the observer can only make
+ * it move; if the script never runs, the page is still a page.
+ */
+.reveal { opacity: 1; }
+[data-js] .reveal { opacity: 0; transform: translateY(14px); }
+[data-js] .reveal.is-in {
+  opacity: 1;
+  transform: none;
+  transition: opacity 620ms cubic-bezier(0.22, 0.61, 0.36, 1),
+              transform 620ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+[data-js] .reveal.d1.is-in { transition-delay: 90ms; }
+[data-js] .reveal.d2.is-in { transition-delay: 180ms; }
+[data-js] .reveal.d3.is-in { transition-delay: 270ms; }
+
+/* --- the scales ---------------------------------------------------------- */
+/* The beam tips, slowly, and settles level. A court that is still deciding is
+   the only thing on the landing page that moves on its own. */
+@keyframes beam-tip {
+  0%, 100% { transform: rotate(-4.5deg); }
+  50%      { transform: rotate(4.5deg); }
+}
+@keyframes pan-drop-l {
+  0%, 100% { transform: translateY(-7px); }
+  50%      { transform: translateY(7px); }
+}
+@keyframes pan-drop-r {
+  0%, 100% { transform: translateY(7px); }
+  50%      { transform: translateY(-7px); }
+}
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.35; }
+  50%      { opacity: 0.7; }
+}
+.scales-beam { animation: beam-tip 7s ease-in-out infinite; transform-origin: 50% 50%; }
+.scales-pan-l { animation: pan-drop-l 7s ease-in-out infinite; }
+.scales-pan-r { animation: pan-drop-r 7s ease-in-out infinite; }
+.scales-glow { animation: glow-pulse 5s ease-in-out infinite; }
+
+/* The loading indicator: the same scales, turning. */
+@keyframes scale-spin { to { transform: rotate(360deg); } }
+.spin-scale { animation: scale-spin 1.6s linear infinite; transform-origin: 50% 50%; }
+
+/* --- the judging progress bar -------------------------------------------- */
+/* Indeterminate on purpose. A jury takes as long as it takes, and a bar that
+   claimed to know how far along it was would be inventing a number. */
+@keyframes judging-sweep {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(340%); }
+}
+.judging-track {
+  position: relative;
+  height: 3px;
+  border-radius: 999px;
+  background: var(--rule);
+  overflow: hidden;
+}
+.judging-track::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 30%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  animation: judging-sweep 1.5s ease-in-out infinite;
+}
+
+/* --- the award ladder ---------------------------------------------------- */
+
+@keyframes award-grow { from { width: 0%; } }
+@keyframes award-settle {
+  0%   { transform: translate(-90%, -50%) scale(0.5); opacity: 0; }
+  70%  { opacity: 1; }
+  100% { transform: translate(0, -50%) scale(1); opacity: 1; }
+}
+.award-fill { animation: award-grow 1000ms cubic-bezier(0.22, 0.61, 0.36, 1) both; }
+.award-mark { animation: award-settle 1000ms cubic-bezier(0.22, 0.61, 0.36, 1) both; }
+
+/* --- reduced motion ------------------------------------------------------ */
+/*
+ * Everything that moves on its own stops. The scroll reveal is neutralised at
+ * its VISIBLE end state rather than its hidden one, which is the direction that
+ * matters: the alternative is a page of invisible text.
+ */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
-}
-
-/* --- the one orchestrated moment ----------------------------------------- */
-/* A decided case animates its award into place once, on load: the bar grows
-   along the scale and the marker settles on the point the jury chose. It is the
-   only motion on the site that a person did not trigger, and it exists because
-   WHERE the award landed inside its permitted window is the thing worth
-   noticing. Everything else is still. */
-
-@keyframes award-grow {
-  from { width: 0%; }
-}
-@keyframes award-settle {
-  0%   { transform: translate(-100%, -50%); opacity: 0; }
-  60%  { opacity: 1; }
-  100% { transform: translate(0, -50%); opacity: 1; }
-}
-.award-fill {
-  animation: award-grow 900ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
-}
-.award-mark {
-  animation: award-settle 900ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
-}
-@media (prefers-reduced-motion: reduce) {
-  .award-fill, .award-mark { animation: none !important; }
+  [data-js] .reveal { opacity: 1 !important; transform: none !important; }
+  .scales-beam, .scales-pan-l, .scales-pan-r, .scales-glow,
+  .spin-scale, .judging-track::after { animation: none !important; }
+  .card-link:hover { transform: none; }
 }

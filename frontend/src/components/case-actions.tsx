@@ -93,13 +93,13 @@ export function CaseActions({ c, config }: Props) {
   return (
     <div className="card p-5">
       <div className="flex items-center gap-2 mb-1">
-        <Scale size={16} strokeWidth={1.9} className="text-brand" aria-hidden />
+        <Scale size={16} strokeWidth={1.9} className="text-gold" aria-hidden />
         <h2 className="font-semibold text-[0.95rem]">What you can do</h2>
       </div>
 
       {needKey ? (
         <>
-          <p className="text-[0.86rem] text-ink-3 leading-relaxed mt-2">
+          <p className="text-[0.86rem] text-ivory-3 leading-relaxed mt-2">
             You need an identity in this court before you can act on a case.
             One click, no extension, testnet only.
           </p>
@@ -109,7 +109,7 @@ export function CaseActions({ c, config }: Props) {
         </>
       ) : (
         <>
-          <p className="text-[0.84rem] text-ink-3 mt-1.5">
+          <p className="text-[0.84rem] text-ivory-3 mt-1.5">
             {isPlaintiff ? "You filed this case."
               : isDefendant ? "This case names you as the defendant."
                 : "You are not a party to this case."}
@@ -161,7 +161,7 @@ export function CaseActions({ c, config }: Props) {
                   {busy === "judge" ? <Loader2 size={15} className="animate-spin" /> : <Gavel size={15} />}
                   {busy === "judge" ? "The jury is sitting…" : "Send to the jury"}
                 </button>
-                <p className="mt-1.5 text-[0.8rem] text-ink-3 leading-snug">
+                <p className="mt-1.5 text-[0.8rem] text-ivory-3 leading-snug">
                   Anyone can do this, including you. Validators read both filings
                   and must agree before anything is paid. It takes about a minute.
                 </p>
@@ -179,7 +179,7 @@ export function CaseActions({ c, config }: Props) {
                   {busy === "default" ? <Loader2 size={15} className="animate-spin" /> : <Gavel size={15} />}
                   Enter judgment by default
                 </button>
-                <p className="mt-1.5 text-[0.8rem] text-ink-3 leading-snug">
+                <p className="mt-1.5 text-[0.8rem] text-ivory-3 leading-snug">
                   The answer window has closed. The plaintiff wins on the merits,
                   but the defendant bonded nothing, so only the filing fee is
                   actually paid — the claim itself stands unenforced.
@@ -201,9 +201,9 @@ export function CaseActions({ c, config }: Props) {
 
             {/* --- money waiting for you ---------------------------------- */}
             {owed > 0n ? (
-              <div className="pt-2.5 border-t border-rule">
+              <div className="pt-2.5 border-t border-[var(--rule)]">
                 <div className="flex items-baseline justify-between text-[0.88rem] mb-2">
-                  <span className="text-ink-2">This court owes you</span>
+                  <span className="text-ivory-2">This court owes you</span>
                   <span className="tnum font-semibold">{gen(owed.toString())} GEN</span>
                 </div>
                 <button
@@ -227,7 +227,7 @@ export function CaseActions({ c, config }: Props) {
           </div>
 
           {!c.can_judge && !c.can_default && !c.can_withdraw && !c.can_respond && owed === 0n && !c.judging_stuck ? (
-            <p className="mt-4 text-[0.85rem] text-ink-3 leading-relaxed">
+            <p className="mt-4 text-[0.85rem] text-ivory-3 leading-relaxed">
               {c.status === "FILED" && !isDefendant
                 ? "Nothing to do until the defendant answers or the window closes."
                 : c.judging_since
@@ -243,8 +243,8 @@ export function CaseActions({ c, config }: Props) {
           <Notice tone={msg.ok ? "info" : "bad"}>
             <p className="flex items-start gap-2">
               {msg.ok
-                ? <CheckCircle2 size={15} className="mt-0.5 shrink-0 text-plaintiff" aria-hidden />
-                : <AlertCircle size={15} className="mt-0.5 shrink-0 text-defendant" aria-hidden />}
+                ? <CheckCircle2 size={15} className="mt-0.5 shrink-0 text-[var(--plaintiff)]" aria-hidden />
+                : <AlertCircle size={15} className="mt-0.5 shrink-0 text-[var(--defendant-text)]" aria-hidden />}
               <span>{msg.text}</span>
             </p>
             {msg.hash ? (
@@ -306,7 +306,7 @@ function RespondForm({
 
   return (
     <form
-      className="border border-rule rounded-[9px] p-4"
+      className="border border-[var(--rule)] rounded-[9px] p-4"
       onSubmit={async (e) => {
         e.preventDefault();
         if (!valid || busy) return;
@@ -325,7 +325,7 @@ function RespondForm({
       }}
     >
       <p className="font-semibold text-[0.92rem]">Your answer</p>
-      <p className="mt-1 text-[0.83rem] text-ink-3 leading-snug">
+      <p className="mt-1 text-[0.83rem] text-ivory-3 leading-snug">
         To answer you must bond the full {gen(c.amount_claimed_wei)} GEN claimed.
         Anything the jury does not award comes straight back to you.
       </p>
@@ -354,7 +354,7 @@ function RespondForm({
 
       <label className="block mt-3">
         <span className="text-[0.85rem] font-medium">What you think is fair</span>
-        <span className="block text-[0.8rem] text-ink-3 mb-1">
+        <span className="block text-[0.8rem] text-ivory-3 mb-1">
           Zero if you owe nothing. The jury sees this, but it is not what secures
           the case — the bond is.
         </span>
@@ -365,11 +365,11 @@ function RespondForm({
             value={offer}
             onChange={(e) => setOffer(e.target.value)}
           />
-          <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[0.82rem] text-ink-3">GEN</span>
+          <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[0.82rem] text-ivory-3">GEN</span>
         </div>
       </label>
 
-      {err ? <p className="mt-3 text-[0.84rem] text-defendant">{err}</p> : null}
+      {err ? <p className="mt-3 text-[0.84rem] text-[var(--defendant-text)]">{err}</p> : null}
 
       <div className="mt-4 flex gap-2">
         {enough ? (

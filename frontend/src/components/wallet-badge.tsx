@@ -20,7 +20,7 @@ export function WalletBadge() {
   const [copied, setCopied] = useState(false);
 
   if (!ready) {
-    return <span className="badge border-rule-strong text-ink-3">Loading…</span>;
+    return <span className="badge border-[var(--rule-strong)] text-ivory-3">Loading…</span>;
   }
 
   if (!address) {
@@ -45,13 +45,13 @@ export function WalletBadge() {
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="flex items-center gap-2 rounded-[7px] border border-rule-strong bg-card px-2.5 py-1.5 text-[0.84rem] hover:border-ink-3 transition-colors"
+        className="flex items-center gap-2 rounded-[7px] border border-[var(--rule-strong)] bg-[var(--card)] px-2.5 py-1.5 text-[0.84rem] hover:border-[var(--gold)] transition-colors"
         aria-expanded={open}
       >
         <span className="tnum font-semibold">{gen(balanceWei.toString(), 2)}</span>
-        <span className="text-ink-3 text-[0.75rem]">GEN</span>
-        <span className="w-px h-3.5 bg-rule-strong" aria-hidden />
-        <span className="mono-addr text-ink-2">{shortAddress(address)}</span>
+        <span className="text-ivory-3 text-[0.75rem]">GEN</span>
+        <span className="w-px h-3.5 bg-[var(--rule-strong)]" aria-hidden />
+        <span className="mono-addr text-ivory-2">{shortAddress(address)}</span>
       </button>
 
       {open ? (
@@ -62,8 +62,9 @@ export function WalletBadge() {
             aria-label="Close"
             onClick={() => setOpen(false)}
           />
-          <div className="absolute right-0 mt-2 z-50 w-[19rem] card p-4 shadow-[var(--shadow-lift)]">
-            <p className="text-[0.8rem] text-ink-3">Your address in this court</p>
+          <div className="absolute right-0 mt-2 z-50 w-[19rem] card p-4"
+            style={{ boxShadow: "var(--shadow-gold)" }}>
+            <p className="text-[0.8rem] text-ivory-3">Your address in this court</p>
             <div className="mt-1 flex items-center gap-2">
               <a
                 href={addressUrl(address)}
@@ -79,7 +80,7 @@ export function WalletBadge() {
             </div>
 
             <div className="mt-3 flex items-baseline justify-between">
-              <span className="text-[0.8rem] text-ink-3">Balance</span>
+              <span className="text-[0.8rem] text-ivory-3">Balance</span>
               <span className="tnum font-semibold">{gen(balanceWei.toString())} GEN</span>
             </div>
 
@@ -93,13 +94,13 @@ export function WalletBadge() {
               {funding ? "Asking the faucet…" : "Add 50 test GEN"}
             </button>
 
-            <p className="mt-3 text-[0.78rem] leading-relaxed text-ink-3">
+            <p className="mt-3 text-[0.78rem] leading-relaxed text-ivory-3">
               This is a throwaway key generated in this browser and stored only
               here. It is funded from a public faucet and the GEN it holds is
               worth nothing. Do not send it anything you care about.
             </p>
 
-            <div className="mt-3 pt-3 border-t border-rule flex items-center justify-between">
+            <div className="mt-3 pt-3 border-t border-[var(--rule)] flex items-center justify-between">
               <button
                 type="button"
                 onClick={() => { void navigator.clipboard.writeText(exportKey() ?? ""); }}
@@ -110,7 +111,7 @@ export function WalletBadge() {
               <button
                 type="button"
                 onClick={() => { forget(); setOpen(false); }}
-                className="text-[0.78rem] inline-flex items-center gap-1.5 text-defendant hover:underline"
+                className="text-[0.78rem] inline-flex items-center gap-1.5 text-[var(--defendant-text)] hover:underline"
               >
                 <Trash2 size={12} aria-hidden /> Forget this key
               </button>
