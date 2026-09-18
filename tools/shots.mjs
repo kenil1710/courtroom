@@ -38,8 +38,12 @@ for (const [device, width, height] of [["desktop", 1440, 900], ["phone", 390, 84
   page.on("pageerror", (e) => errors.push(String(e)));
 
   for (const [name, path] of PAGES) {
-    await page.goto(BASE + path, { waitUntil: "networkidle", timeout: 60000 });
-    await page.waitForTimeout(1200);
+    // `load`, not `networkidle`. A deployed page keeps a connection warm long
+    // enough that `networkidle` never fires, and the check then reports a
+    // timeout on a page that rendered correctly in 400ms.
+    await page.goto(BASE + path, { waitUntil: "load", timeout: 60000 });
+    await page.waitForLoadState("domcontentloaded");
+    await page.waitForTimeout(1500);
     await page.screenshot({ path: `${OUT}${device}-${name}.png`, fullPage: true });
 
     const overflow = await page.evaluate(() => ({

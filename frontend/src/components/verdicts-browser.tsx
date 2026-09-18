@@ -8,11 +8,15 @@ import { OUTCOME_TONE, QUALITY_LABEL, gen, headline, stamp } from "@/lib/format"
 import { Address, AwardLadder, Empty } from "@/components/ui";
 import type { Quality } from "@/lib/types";
 
+/* The labels here are the SAME WORDS the verdict badge uses. An outcome that is
+   filtered as "Split" and displayed as "Partial award" is two names for one
+   thing, and the vocabulary of an interface is how people learn their way
+   around it. */
 const TABS: Array<{ id: Outcome | "all"; label: string }> = [
   { id: "all", label: "All" },
-  { id: "PLAINTIFF_WINS", label: "Plaintiff won" },
-  { id: "PARTIAL", label: "Split" },
-  { id: "DEFENDANT_WINS", label: "Defendant won" },
+  { id: "PLAINTIFF_WINS", label: "Plaintiff wins" },
+  { id: "PARTIAL", label: "Partial award" },
+  { id: "DEFENDANT_WINS", label: "Defendant wins" },
   { id: "DISMISSED", label: "Dismissed" },
 ];
 
