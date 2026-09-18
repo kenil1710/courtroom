@@ -7,8 +7,9 @@ them independently, and have to agree before anything counts. The contract
 divides the money the moment they do — no release step, no discretion, and
 nobody to appeal to for a different answer.
 
-**Live on GenLayer Studio Dev.** Testnet only: the GEN here is worth nothing and
-so is a judgment from it.
+**[courtroom-nine.vercel.app](https://courtroom-nine.vercel.app)** — live on
+GenLayer Studio Dev. Testnet only: the GEN here is worth nothing and so is a
+judgment from it.
 
 | | |
 |---|---|

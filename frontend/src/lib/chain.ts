@@ -42,5 +42,10 @@ export const CONSUMER_ADDRESS = (process.env.NEXT_PUBLIC_CONSUMER_ADDRESS ??
 
 export const GITHUB = "https://github.com/kenil1710/courtroom";
 
+/** The canonical public URL. Vercel assigns two: this PROJECT domain, and a
+ *  deployment URL behind Deployment Protection that answers 302 to anyone who
+ *  is not signed in. Only the project domain is shareable. */
+export const SITE = "https://courtroom-nine.vercel.app";
+
 export const txUrl = (hash: string) => `${CHAIN.explorer}/tx/${hash}`;
 export const addressUrl = (address: string) => `${CHAIN.explorer}/address/${address}`;
