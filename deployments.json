@@ -1,0 +1,40 @@
+{
+  "deployments": {
+    "studiodev": {
+      "network": "studiodev",
+      "chain_id": 61997,
+      "CourtRoom": {
+        "address": "0xB5380363256f78Bc1612b468513A989545d18898",
+        "deploy_tx": "0x4f1bf372b48d6602507f08b427c1b5b8025f75833662f43671a94ac1204ee11f",
+        "source_bytes": 121461,
+        "owner": "0xD0cc53348e0E01D5356d7eA3Df0e217E7f67dFAe",
+        "rubric_version": "1.0.0",
+        "filing_fee_wei": "100000000000000000",
+        "response_window_s": 172800,
+        "stall_ttl_s": 172800,
+        "deployed_at": "2026-09-18T08:52:03.587Z"
+      },
+      "explorer": "https://explorer-studio-dev.genlayer.com/",
+      "CourtRoomFast": {
+        "address": "0x727EDf834FAdD7aA5763cfBB526925535541370a",
+        "deploy_tx": "0x8fdd2e2a48bc8ddc29088d0d4ca5437a259e3b6da1a08f6a7b9b74fc8718fa5b",
+        "source_bytes": 121461,
+        "owner": "0xD0cc53348e0E01D5356d7eA3Df0e217E7f67dFAe",
+        "rubric_version": "1.0.0",
+        "filing_fee_wei": "100000000000000000",
+        "response_window_s": 300,
+        "stall_ttl_s": 300,
+        "deployed_at": "2026-09-18T08:52:16.806Z"
+      },
+      "ArbitrationConsumer": {
+        "address": "0x04605aCDB814715E1c39FCdcee52FdDbc57F9027",
+        "deploy_tx": "0x23e205b79f7419580afa2f4cc16fad4f0d7eba45c12ebf63da820e53a67d74f8",
+        "source_bytes": 36508,
+        "court": "0xB5380363256f78Bc1612b468513A989545d18898",
+        "owner": "0x70dB845cd660af9F7952011eCCe2E477Ae58ea76",
+        "custody": false,
+        "deployed_at": "2026-09-18T08:52:36.270Z"
+      }
+    }
+  }
+}

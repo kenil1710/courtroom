@@ -1,0 +1,640 @@
+{
+  "network": "studiodev",
+  "court": "0xB5380363256f78Bc1612b468513A989545d18898",
+  "fast": "0x727EDf834FAdD7aA5763cfBB526925535541370a",
+  "market": "0x04605aCDB814715E1c39FCdcee52FdDbc57F9027",
+  "ran_at": "2026-09-18T09:03:06.025Z",
+  "cases": [
+    {
+      "key": "unfinished-website",
+      "note": "One side documents everything; the other denies without detail.",
+      "case_id": 1,
+      "court": "0xB5380363256f78Bc1612b468513A989545d18898",
+      "plaintiff": "0x0d77Ae11660607503D9f8bD12Fa3a6d4BC2cf24b",
+      "defendant": "0xa771Ca47044117186487a194A6d74dFda2f53eA9",
+      "amount_claimed_wei": "2500000000000000000",
+      "aimed_at": "PLAINTIFF_WINS",
+      "preview": {
+        "bracket_pct": [
+          75,
+          100
+        ],
+        "plaintiff_specificity": 7,
+        "defendant_specificity": 1,
+        "options": 3
+      },
+      "status": "SETTLED",
+      "resolution": "VERDICT",
+      "outcome": "PLAINTIFF_WINS",
+      "award_bps": 10000,
+      "award_wei": "2500000000000000000",
+      "evidence_quality": "PLAINTIFF",
+      "verdict_key": "PLAINTIFF_WINS|10000|PLAINTIFF",
+      "content_hash": "1434:b8a317ad806ed312",
+      "signals_csv": "p_len=4,p_digits=53,p_money=6,p_dates=11,p_refs=14,p_quotes=4,p_spec=7,d_len=2,d_digits=0,d_money=0,d_dates=0,d_refs=0,d_quotes=0,d_spec=1,gap_off=13",
+      "jury_option": 2,
+      "option_count": 3,
+      "bracket": [
+        6,
+        8
+      ],
+      "model_called": true,
+      "to_plaintiff_wei": "2600000000000000000",
+      "to_defendant_wei": "0",
+      "unenforced_wei": "0",
+      "reasoning": "The claim runs 1078 characters and cites 53 figures, 11 dates and 14 documentary references. The answer runs 245 characters and cites nothing checkable. On the record the claim is the better substantiated of the two (7 against 1 on an eight-point specificity scale), which bounded the award to between 75% and 100% of the amount claimed. The jury found the plaintiff's evidence the stronger and awarded the full amount claimed. Judgment for the plaintiff in full: 2.5 GEN, with the filing fee returned.",
+      "file_tx": "0xd308fae47309cd289f5495fc46c9cc7a76e2622e709f9bbcd57f3e4a388556e3",
+      "settle_tx": "0x5dfff2edcc7aa43ad91b63ee53561ab8910cddacac508073573861e7c23d9256",
+      "verify": {
+        "matches": true,
+        "checks": {
+          "award_bps": true,
+          "award_wei": true,
+          "bracket": true,
+          "conservation": true,
+          "content_hash": true,
+          "evidence_quality": true,
+          "option_in_bracket": true,
+          "outcome": true,
+          "reasoning": true,
+          "settlement_split": true,
+          "signals_csv": true,
+          "verdict_key": true
+        },
+        "failed": []
+      },
+      "conservation_ok": true,
+      "payouts": [
+        {
+          "role": "plaintiff1",
+          "address": "0x0d77Ae11660607503D9f8bD12Fa3a6d4BC2cf24b",
+          "status": "OK",
+          "owed_wei": "2600000000000000000",
+          "paid_wei": "0",
+          "claim_tx": "0x4c20a7d736ff6cfd5715b59ced8d7a68dc2eb5b5c4b0b3feb3fdd6624177d951",
+          "finalized": true,
+          "queued_transfer": {
+            "on": "finalized",
+            "value": "2600000000000000000",
+            "address": "0x0d77Ae11660607503D9f8bD12Fa3a6d4BC2cf24b"
+          },
+          "transfer_well_formed": true,
+          "balance_before_wei": "239799712049249997531",
+          "balance_after_wei": "239799581391499996708",
+          "note": "Studio Dev queues on=finalized transfers and does not execute them; the contract's job is to post one correctly, which it did"
+        },
+        {
+          "role": "defendant1",
+          "owed_wei": "0",
+          "moved_wei": "0",
+          "status": "NOTHING_OWED"
+        }
+      ],
+      "ledger": {
+        "ledger_balanced": true,
+        "balance_wei": "0",
+        "escrowed_wei": "0",
+        "payable_wei": "0"
+      }
+    },
+    {
+      "key": "laptop-delivered",
+      "note": "A bare assertion against a fully documented answer.",
+      "case_id": 2,
+      "court": "0xB5380363256f78Bc1612b468513A989545d18898",
+      "plaintiff": "0x25666897e248713aA30df2221919017659f2F71E",
+      "defendant": "0xDd125623227c8590876c1303a920675F56A405D5",
+      "amount_claimed_wei": "1200000000000000000",
+      "aimed_at": "DEFENDANT_WINS",
+      "preview": {
+        "bracket_pct": [
+          0,
+          10
+        ],
+        "plaintiff_specificity": 1,
+        "defendant_specificity": 7,
+        "options": 4
+      },
+      "status": "SETTLED",
+      "resolution": "VERDICT",
+      "outcome": "DEFENDANT_WINS",
+      "award_bps": 0,
+      "award_wei": "0",
+      "evidence_quality": "DEFENDANT",
+      "verdict_key": "DEFENDANT_WINS|0|DEFENDANT",
+      "content_hash": "1160:e2f541b525715f7b",
+      "signals_csv": "p_len=2,p_digits=0,p_money=0,p_dates=0,p_refs=0,p_quotes=0,p_spec=1,d_len=4,d_digits=39,d_money=1,d_dates=8,d_refs=12,d_quotes=4,d_spec=7,gap_off=1",
+      "jury_option": 0,
+      "option_count": 4,
+      "bracket": [
+        0,
+        1
+      ],
+      "model_called": true,
+      "to_plaintiff_wei": "0",
+      "to_defendant_wei": "1300000000000000000",
+      "unenforced_wei": "0",
+      "reasoning": "The claim runs 249 characters and cites nothing checkable. The answer runs 800 characters and cites 39 figures, 8 dates and 12 documentary references. On the record the answer is the better substantiated of the two (7 against 1 on an eight-point specificity scale), which bounded the award to between 0% and 10% of the amount claimed. The jury found the defendant's evidence the stronger and awarded nothing at all. Judgment for the defendant: the bond is returned and the filing fee passes to the defendant for having had to answer.",
+      "file_tx": "0xad38308027ed2e72d702dad90eb69cb3bd1b70a1954b15dbd46812918ceb36d5",
+      "settle_tx": "0x2a5034eef37933b3abefa2708db9f323ccc6b3ef9ba8a9ea0c9a5f1b7d9fa5f8",
+      "verify": {
+        "matches": true,
+        "checks": {
+          "award_bps": true,
+          "award_wei": true,
+          "bracket": true,
+          "conservation": true,
+          "content_hash": true,
+          "evidence_quality": true,
+          "option_in_bracket": true,
+          "outcome": true,
+          "reasoning": true,
+          "settlement_split": true,
+          "signals_csv": true,
+          "verdict_key": true
+        },
+        "failed": []
+      },
+      "conservation_ok": true,
+      "payouts": [
+        {
+          "role": "plaintiff2",
+          "owed_wei": "0",
+          "moved_wei": "0",
+          "status": "NOTHING_OWED"
+        },
+        {
+          "role": "defendant2",
+          "address": "0xDd125623227c8590876c1303a920675F56A405D5",
+          "status": "OK",
+          "owed_wei": "1300000000000000000",
+          "paid_wei": "0",
+          "claim_tx": "0xa2ef9768a3fd890550fa4c0319216b5cc46a9906528166e54d1c1967f1619881",
+          "finalized": true,
+          "queued_transfer": {
+            "on": "finalized",
+            "value": "1300000000000000000",
+            "address": "0xDd125623227c8590876c1303a920675F56A405D5"
+          },
+          "transfer_well_formed": true,
+          "balance_before_wei": "61199412162299988002",
+          "balance_after_wei": "61199581406999996708",
+          "note": "Studio Dev queues on=finalized transfers and does not execute them; the contract's job is to post one correctly, which it did"
+        }
+      ],
+      "ledger": {
+        "ledger_balanced": true,
+        "balance_wei": "0",
+        "escrowed_wei": "0",
+        "payable_wei": "0"
+      }
+    },
+    {
+      "key": "kitchen-fitting",
+      "note": "Both sides document a real grievance. Neither is wholly right.",
+      "case_id": 3,
+      "court": "0xB5380363256f78Bc1612b468513A989545d18898",
+      "plaintiff": "0x8cDEDF37ad9C5e2F54e4e98F43EbEDB8d0C4d452",
+      "defendant": "0x9cE38A296A77f9cFE41B9ADF313504c8eCF497AC",
+      "amount_claimed_wei": "4000000000000000000",
+      "aimed_at": "PARTIAL",
+      "preview": {
+        "bracket_pct": [
+          25,
+          50
+        ],
+        "plaintiff_specificity": 6,
+        "defendant_specificity": 6,
+        "options": 8
+      },
+      "status": "SETTLED",
+      "resolution": "VERDICT",
+      "outcome": "PARTIAL",
+      "award_bps": 3500,
+      "award_wei": "1400000000000000000",
+      "evidence_quality": "DEFENDANT",
+      "verdict_key": "PARTIAL|3500|DEFENDANT",
+      "content_hash": "1670:00090549d64cb2ba",
+      "signals_csv": "p_len=4,p_digits=44,p_money=8,p_dates=10,p_refs=2,p_quotes=0,p_spec=6,d_len=4,d_digits=39,d_money=0,d_dates=9,d_refs=4,d_quotes=2,d_spec=6,gap_off=7",
+      "jury_option": 2,
+      "option_count": 8,
+      "bracket": [
+        2,
+        4
+      ],
+      "model_called": true,
+      "to_plaintiff_wei": "1500000000000000000",
+      "to_defendant_wei": "2600000000000000000",
+      "unenforced_wei": "0",
+      "reasoning": "The claim runs 761 characters and cites 44 figures, 10 dates and 2 documentary references. The answer runs 798 characters and cites 39 figures, 9 dates and 4 documentary references. On the record both sides are substantiated to the same degree (6 on an eight-point specificity scale), which bounded the award to between 25% and 50% of the amount claimed. The jury found the defendant's evidence the stronger and awarded just over a third of the amount claimed. Partial judgment: 1.4 GEN of the 4 GEN claimed, with the balance returned to the defendant and the filing fee returned to the plaintiff.",
+      "file_tx": "0x4eed7a5016b5d49759dedfbe119065e4a4dea2c0695dcb7f46c4e594f16bac35",
+      "settle_tx": "0x43e57cb7b1f1b3db0081142d53d99cf523ac221be9d33e49a28257238439d5f1",
+      "verify": {
+        "matches": true,
+        "checks": {
+          "award_bps": true,
+          "award_wei": true,
+          "bracket": true,
+          "conservation": true,
+          "content_hash": true,
+          "evidence_quality": true,
+          "option_in_bracket": true,
+          "outcome": true,
+          "reasoning": true,
+          "settlement_split": true,
+          "signals_csv": true,
+          "verdict_key": true
+        },
+        "failed": []
+      },
+      "conservation_ok": true,
+      "payouts": [
+        {
+          "role": "plaintiff3",
+          "address": "0x8cDEDF37ad9C5e2F54e4e98F43EbEDB8d0C4d452",
+          "status": "OK",
+          "owed_wei": "1500000000000000000",
+          "paid_wei": "0",
+          "claim_tx": "0x3291cd690ac798431ef419f90cc825c350b112466265b87ea149b0c6f734d035",
+          "finalized": true,
+          "queued_transfer": {
+            "on": "finalized",
+            "value": "1500000000000000000",
+            "address": "0x8cDEDF37ad9C5e2F54e4e98F43EbEDB8d0C4d452"
+          },
+          "transfer_well_formed": true,
+          "balance_before_wei": "259699424116249995062",
+          "balance_after_wei": "259699293458499994239",
+          "note": "Studio Dev queues on=finalized transfers and does not execute them; the contract's job is to post one correctly, which it did"
+        },
+        {
+          "role": "defendant3",
+          "address": "0x9cE38A296A77f9cFE41B9ADF313504c8eCF497AC",
+          "status": "OK",
+          "owed_wei": "2600000000000000000",
+          "paid_wei": "0",
+          "claim_tx": "0xf4e75808c72e5d0e452beb67ff3145533a30b65613269f9f845dc146028c355c",
+          "finalized": true,
+          "queued_transfer": {
+            "on": "finalized",
+            "value": "2600000000000000000",
+            "address": "0x9cE38A296A77f9cFE41B9ADF313504c8eCF497AC"
+          },
+          "transfer_well_formed": true,
+          "balance_before_wei": "63999712065749997296",
+          "balance_after_wei": "63999581407999996473",
+          "note": "Studio Dev queues on=finalized transfers and does not execute them; the contract's job is to post one correctly, which it did"
+        }
+      ],
+      "ledger": {
+        "ledger_balanced": true,
+        "balance_wei": "0",
+        "escrowed_wei": "0",
+        "payable_wei": "0"
+      }
+    },
+    {
+      "key": "verbal-loan",
+      "note": "A verbal arrangement with nothing on either side of the record.",
+      "case_id": 4,
+      "court": "0xB5380363256f78Bc1612b468513A989545d18898",
+      "plaintiff": "0xf38E1c691Aa93f672aD2047cd8e850AA178Eeb98",
+      "defendant": "0x036f2Fd8a51517D78A7dE33f0Cbbde1ffAbBC64a",
+      "amount_claimed_wei": "800000000000000000",
+      "aimed_at": "DISMISSED",
+      "preview": {
+        "bracket_pct": [
+          0,
+          0
+        ],
+        "plaintiff_specificity": 1,
+        "defendant_specificity": 1,
+        "options": 2
+      },
+      "status": "SETTLED",
+      "resolution": "VERDICT",
+      "outcome": "DISMISSED",
+      "award_bps": 0,
+      "award_wei": "0",
+      "evidence_quality": "EQUAL",
+      "verdict_key": "DISMISSED|0|EQUAL",
+      "content_hash": "620:7a8e0250d7cadb3c",
+      "signals_csv": "p_len=2,p_digits=0,p_money=0,p_dates=0,p_refs=0,p_quotes=0,p_spec=1,d_len=2,d_digits=0,d_money=0,d_dates=0,d_refs=0,d_quotes=0,d_spec=1,gap_off=7",
+      "jury_option": 0,
+      "option_count": 2,
+      "bracket": [
+        0,
+        0
+      ],
+      "model_called": true,
+      "to_plaintiff_wei": "100000000000000000",
+      "to_defendant_wei": "800000000000000000",
+      "unenforced_wei": "0",
+      "reasoning": "The claim runs 266 characters and cites nothing checkable. The answer runs 244 characters and cites nothing checkable. Neither filing put anything checkable on the record, so there is nothing here to decide between: the case is dismissed and both sides are made whole. Dismissed: the bond is returned and the filing fee goes back to the plaintiff. Neither side is found against.",
+      "file_tx": "0xe8ee42efdced693538968aa6d89592b851921d4ca3b81f7d9f2c20322e3b1329",
+      "settle_tx": "0xe05dadd22b018b5309c7f5fb4e6fe3fe5f58dfc386c84f637e6ec9b7fd016432",
+      "verify": {
+        "matches": true,
+        "checks": {
+          "award_bps": true,
+          "award_wei": true,
+          "bracket": true,
+          "conservation": true,
+          "content_hash": true,
+          "evidence_quality": true,
+          "option_in_bracket": true,
+          "outcome": true,
+          "reasoning": true,
+          "settlement_split": true,
+          "signals_csv": true,
+          "verdict_key": true
+        },
+        "failed": []
+      },
+      "conservation_ok": true,
+      "payouts": [
+        {
+          "role": "plaintiff4",
+          "address": "0xf38E1c691Aa93f672aD2047cd8e850AA178Eeb98",
+          "status": "OK",
+          "owed_wei": "100000000000000000",
+          "paid_wei": "0",
+          "claim_tx": "0x071d50e0d7267a023dd148f4c5b42e9eb089177ddaf5374739f5be169e06e6df",
+          "finalized": true,
+          "queued_transfer": {
+            "on": "finalized",
+            "value": "100000000000000000",
+            "address": "0xf38E1c691Aa93f672aD2047cd8e850AA178Eeb98"
+          },
+          "transfer_well_formed": true,
+          "balance_before_wei": "179799712058249997531",
+          "balance_after_wei": "179799581400499996708",
+          "note": "Studio Dev queues on=finalized transfers and does not execute them; the contract's job is to post one correctly, which it did"
+        },
+        {
+          "role": "defendant4",
+          "address": "0x036f2Fd8a51517D78A7dE33f0Cbbde1ffAbBC64a",
+          "status": "OK",
+          "owed_wei": "800000000000000000",
+          "paid_wei": "0",
+          "claim_tx": "0x325628f6593c317b58aa5e4e0e6b2dc377e58329018cc3283b4424d36e8b1262",
+          "finalized": true,
+          "queued_transfer": {
+            "on": "finalized",
+            "value": "800000000000000000",
+            "address": "0x036f2Fd8a51517D78A7dE33f0Cbbde1ffAbBC64a"
+          },
+          "transfer_well_formed": true,
+          "balance_before_wei": "60799712072749997531",
+          "balance_after_wei": "60799581414999996708",
+          "note": "Studio Dev queues on=finalized transfers and does not execute them; the contract's job is to post one correctly, which it did"
+        }
+      ],
+      "ledger": {
+        "ledger_balanced": true,
+        "balance_wei": "0",
+        "escrowed_wei": "0",
+        "payable_wei": "0"
+      }
+    },
+    {
+      "key": "conceded-deposit",
+      "note": "The defendant concedes before any jury sits.",
+      "case_id": 5,
+      "court": "0xB5380363256f78Bc1612b468513A989545d18898",
+      "plaintiff": "0x3DD6D38a01cC2eE23943F3156B320E4dbe137d90",
+      "defendant": "0x0cd5732A2CFfc07d674Ff595d3c31e4c9929D3dF",
+      "amount_claimed_wei": "600000000000000000",
+      "aimed_at": "ACCEPTED",
+      "preview": {
+        "bracket_pct": [
+          75,
+          100
+        ],
+        "plaintiff_specificity": 7,
+        "defendant_specificity": 0,
+        "options": 3
+      },
+      "status": "SETTLED",
+      "resolution": "ACCEPTED",
+      "outcome": "PLAINTIFF_WINS",
+      "award_bps": 10000,
+      "award_wei": "600000000000000000",
+      "evidence_quality": "PLAINTIFF",
+      "verdict_key": "PLAINTIFF_WINS|10000|PLAINTIFF",
+      "content_hash": "728:5c18dc1e9fb3a5d3",
+      "signals_csv": "p_len=3,p_digits=33,p_money=4,p_dates=7,p_refs=4,p_quotes=2,p_spec=7,d_len=0,d_digits=0,d_money=0,d_dates=0,d_refs=0,d_quotes=0,d_spec=0,gap_off=14",
+      "jury_option": 0,
+      "option_count": 0,
+      "bracket": [
+        0,
+        0
+      ],
+      "model_called": false,
+      "to_plaintiff_wei": "700000000000000000",
+      "to_defendant_wei": "0",
+      "unenforced_wei": "0",
+      "reasoning": "The defendant accepted the claim in full and paid 0.6 GEN. No jury was needed: there was nothing left in dispute.",
+      "file_tx": "0x41e197d36b43633453551ff170ba249e4db664a44e013e9f1667d3f58394dd6f",
+      "settle_tx": "0xa0da5b4ad3beeccf7432cf01183fd7a083f3c56e4fe73e5b1779c68c0e597ed0",
+      "verify": {
+        "matches": true,
+        "checks": {
+          "conservation": true,
+          "content_hash": true
+        },
+        "failed": []
+      },
+      "conservation_ok": true,
+      "payouts": [
+        {
+          "role": "plaintiff5",
+          "address": "0x3DD6D38a01cC2eE23943F3156B320E4dbe137d90",
+          "status": "OK",
+          "owed_wei": "700000000000000000",
+          "paid_wei": "0",
+          "claim_tx": "0x2a2014bf05eacfc33e4506a962ab0ab3d06d3710956d3d34003b5ace39d9de95",
+          "finalized": true,
+          "queued_transfer": {
+            "on": "finalized",
+            "value": "700000000000000000",
+            "address": "0x3DD6D38a01cC2eE23943F3156B320E4dbe137d90"
+          },
+          "transfer_well_formed": true,
+          "balance_before_wei": "119799412124599988002",
+          "balance_after_wei": "119799581393999996708",
+          "note": "Studio Dev queues on=finalized transfers and does not execute them; the contract's job is to post one correctly, which it did"
+        },
+        {
+          "role": "defendant5",
+          "owed_wei": "0",
+          "moved_wei": "0",
+          "status": "NOTHING_OWED"
+        }
+      ],
+      "ledger": {
+        "ledger_balanced": true,
+        "balance_wei": "0",
+        "escrowed_wei": "0",
+        "payable_wei": "0"
+      }
+    }
+  ],
+  "fast_cases": [
+    {
+      "key": "withdrawn-claim",
+      "note": "The plaintiff settles privately and withdraws before any answer.",
+      "case_id": 2,
+      "court": "0x727EDf834FAdD7aA5763cfBB526925535541370a",
+      "aimed_at": "WITHDRAWN",
+      "status": "WITHDRAWN",
+      "resolution": "WITHDRAWN",
+      "outcome": "",
+      "to_plaintiff_wei": "100000000000000000",
+      "to_defendant_wei": "0",
+      "reasoning": "Withdrawn by the plaintiff before the defendant answered. No finding was made either way and the filing fee was returned in full.",
+      "content_hash": "582:09faef7840a2071a",
+      "file_tx": "0x5064852fab1cd71f0fb01140344fd3931faf33f3fffb6f0d38f34a7650dc6040",
+      "settle_tx": "0x8cd5eacc63244592b057368f250594035b8b50ca533428db6fb7205f964a0314",
+      "verify": {
+        "matches": true,
+        "failed": []
+      },
+      "payouts": [
+        {
+          "role": "plaintiff2",
+          "address": "0x25666897e248713aA30df2221919017659f2F71E",
+          "status": "OK",
+          "owed_wei": "100000000000000000",
+          "paid_wei": "0",
+          "claim_tx": "0x3b91753ca895502ce8f41e6953850c6632ce6cfdc093ec1b01f6e1fad5950402",
+          "finalized": true,
+          "queued_transfer": {
+            "on": "finalized",
+            "value": "100000000000000000",
+            "address": "0x25666897e248713aA30df2221919017659f2F71E"
+          },
+          "transfer_well_formed": true,
+          "balance_before_wei": "239699085628199977650",
+          "balance_after_wei": "239699554781999995885",
+          "note": "Studio Dev queues on=finalized transfers and does not execute them; the contract's job is to post one correctly, which it did"
+        }
+      ],
+      "ledger": {
+        "ledger_balanced": true,
+        "balance_wei": "100000000000000000",
+        "escrowed_wei": "100000000000000000",
+        "payable_wei": "0"
+      }
+    },
+    {
+      "key": "silent-defendant",
+      "note": "The defendant never answers. Judgment is entered by default.",
+      "case_id": 1,
+      "court": "0x727EDf834FAdD7aA5763cfBB526925535541370a",
+      "aimed_at": "DEFAULT",
+      "status": "DEFAULTED",
+      "resolution": "DEFAULT",
+      "outcome": "PLAINTIFF_WINS",
+      "award_bps": 10000,
+      "award_wei": "0",
+      "unenforced_wei": "1500000000000000000",
+      "to_plaintiff_wei": "100000000000000000",
+      "to_defendant_wei": "0",
+      "reasoning": "The defendant did not answer within the 300-second window, so judgment is entered for the plaintiff by default on the full 1.5 GEN claimed. The defendant posted no bond, so this court holds nothing to pay it from: the 1.5 GEN stands as an unenforced judgment and only the filing fee is returned.",
+      "content_hash": "595:29e906b89bd55bd4",
+      "waited_s": 189,
+      "settle_tx": "0x72fa27bc5aaa824e2d374a2dc88a4b768aa9bfa47a996a63726dc5d27a415ff6",
+      "verify": {
+        "matches": true,
+        "failed": []
+      },
+      "payouts": [
+        {
+          "role": "plaintiff1",
+          "address": "0x0d77Ae11660607503D9f8bD12Fa3a6d4BC2cf24b",
+          "status": "OK",
+          "owed_wei": "100000000000000000",
+          "paid_wei": "0",
+          "claim_tx": "0x220175dacbc4fd9058b96f92e05a2a83758822a5f35025965837653871f650f4",
+          "finalized": true,
+          "queued_transfer": {
+            "on": "finalized",
+            "value": "100000000000000000",
+            "address": "0x0d77Ae11660607503D9f8bD12Fa3a6d4BC2cf24b"
+          },
+          "transfer_well_formed": true,
+          "balance_before_wei": "359699502749749995885",
+          "balance_after_wei": "359699372091999995062",
+          "note": "Studio Dev queues on=finalized transfers and does not execute them; the contract's job is to post one correctly, which it did"
+        }
+      ],
+      "ledger": {
+        "ledger_balanced": true,
+        "balance_wei": "0",
+        "escrowed_wei": "0",
+        "payable_wei": "0"
+      }
+    }
+  ],
+  "marketplace": {
+    "order_id": "order-2026-0914",
+    "market": "0x04605aCDB814715E1c39FCdcee52FdDbc57F9027",
+    "court": "0xB5380363256f78Bc1612b468513A989545d18898",
+    "case_id": 6,
+    "buyer": "0x7C36b556d9882AeBC90C14473C3a13De557eF075",
+    "seller": "0xCA9c7e30d4F6031fb82B1cf72e3929764f2C19C1",
+    "amount_wei": "1800000000000000000",
+    "link_verified": null,
+    "link_tx": "0xb18ae20a89c1af8614ebe4aa86fbd5c43dc278bc9b54d045adec10acc195b3dc",
+    "court_outcome": "PLAINTIFF_WINS",
+    "court_award_bps": 10000,
+    "court_verdict_key": "PLAINTIFF_WINS|10000|PLAINTIFF",
+    "court_content_hash": "1078:68df518d581335b7",
+    "action": "REFUND_BUYER",
+    "buyer_share_wei": "1800000000000000000",
+    "seller_share_wei": "0",
+    "rationale": "the court found for the buyer in full; the order is refunded",
+    "ruling_hash": "1078:68df518d581335b7",
+    "preview_agreed": true,
+    "resolve_tx": "0xecda8c1bb30a0fb8f775d0798fe56a68026d83ccd7a099c12f5fff6a2ce8cb82",
+    "unknown_order_refused": false,
+    "custody": false,
+    "holds_value": false,
+    "payouts": [
+      {
+        "role": "buyer",
+        "address": "0x7C36b556d9882AeBC90C14473C3a13De557eF075",
+        "status": "OK",
+        "owed_wei": "1900000000000000000",
+        "paid_wei": "0",
+        "claim_tx": "0x49fa4aaf5a16811f0c69f039f8c50a5c0e9c09e8580d57297a38bd41d9ed6b37",
+        "finalized": true,
+        "queued_transfer": {
+          "on": "finalized",
+          "value": "1900000000000000000",
+          "address": "0x7C36b556d9882AeBC90C14473C3a13De557eF075"
+        },
+        "transfer_well_formed": true,
+        "balance_before_wei": "59899764085749997531",
+        "balance_after_wei": "59899633427999996708",
+        "note": "Studio Dev queues on=finalized transfers and does not execute them; the contract's job is to post one correctly, which it did"
+      },
+      {
+        "role": "seller",
+        "owed_wei": "0",
+        "moved_wei": "0",
+        "status": "NOTHING_OWED"
+      }
+    ],
+    "ledger": {
+      "ledger_balanced": true,
+      "balance_wei": "0",
+      "escrowed_wei": "0",
+      "payable_wei": "0"
+    }
+  },
+  "notes": [
+    "settle_stalled(1) on a clean case → OK: "
+  ]
+}

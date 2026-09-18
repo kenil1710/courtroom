@@ -1,0 +1,16 @@
+node_modules/
+.next/
+.env.local
+.env
+*.log
+.DS_Store
+.vercel/
+frontend/node_modules/
+frontend/.next/
+frontend/.env.local
+__pycache__/
+*.pyc
+.accounts.json
+*.tsbuildinfo
+test/node_modules/
+tools/node_modules/

@@ -1,0 +1,283 @@
+@import "tailwindcss";
+
+/*
+ * CourtRoom.
+ *
+ * The palette is the brief's, exactly. The rest of the system is built around
+ * one idea taken from the subject: a dispute has TWO SIDES and a RECORD, so the
+ * structural devices are an adversarial split rule and a coloured file edge —
+ * not a badge on everything and a shadow under everything.
+ *
+ * Type: Newsreader for the record (case captions, judgments, headlines) and
+ * Public Sans for the interface. Public Sans is not an aesthetic default here —
+ * it was drawn for public-sector interfaces, which is what a court is.
+ */
+
+:root {
+  --paper: #fafaf9;          /* warm off-white, the page */
+  --card: #ffffff;           /* the filing itself */
+  --ink: #1c1917;            /* stone-900 */
+  --ink-2: #44403c;          /* stone-700, secondary text */
+  --ink-3: #78716c;          /* stone-500, metadata */
+  --rule: #e7e5e4;           /* stone-200, hairlines */
+  --rule-strong: #d6d3d1;    /* stone-300 */
+  --brand: #1e40af;          /* deep blue, the court itself */
+  --brand-ink: #1e3a8a;
+  --brand-wash: #eff6ff;
+
+  --plaintiff: #059669;      /* emerald */
+  --defendant: #e11d48;      /* rose */
+  --partial: #d97706;        /* amber */
+  --dismissed: #64748b;      /* slate */
+
+  --plaintiff-wash: #ecfdf5;
+  --defendant-wash: #fff1f2;
+  --partial-wash: #fffbeb;
+  --dismissed-wash: #f8fafc;
+
+  --shadow-card: 0 1px 2px rgba(28, 25, 23, 0.04), 0 1px 3px rgba(28, 25, 23, 0.06);
+  --shadow-lift: 0 2px 4px rgba(28, 25, 23, 0.04), 0 8px 24px rgba(28, 25, 23, 0.08);
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-card: var(--card);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
+  --color-brand: var(--brand);
+  --color-brand-ink: var(--brand-ink);
+  --color-brand-wash: var(--brand-wash);
+  --color-plaintiff: var(--plaintiff);
+  --color-defendant: var(--defendant);
+  --color-partial: var(--partial);
+  --color-dismissed: var(--dismissed);
+  --font-sans: var(--font-public-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-newsreader), ui-serif, Georgia, serif;
+}
+
+* {
+  border-color: var(--rule);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-feature-settings: "kern" 1;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Money and case numbers are read in columns and compared to each other, so
+   they get tabular figures everywhere. A ledger whose digits do not line up is
+   a ledger nobody checks. */
+.tnum {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+.serif {
+  font-family: var(--font-serif);
+  font-optical-sizing: auto;
+}
+
+/* --- type scale ---------------------------------------------------------- */
+
+.display {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: -0.021em;
+  line-height: 1.04;
+}
+
+.h1 { font-size: clamp(2.25rem, 1.4rem + 3.6vw, 4.25rem); }
+.h2 { font-size: clamp(1.6rem, 1.15rem + 1.9vw, 2.5rem); }
+.h3 { font-size: clamp(1.2rem, 1.05rem + 0.7vw, 1.55rem); }
+
+.lede {
+  font-size: clamp(1.02rem, 0.97rem + 0.28vw, 1.2rem);
+  line-height: 1.6;
+  color: var(--ink-2);
+  max-width: 62ch;
+}
+
+.prose-court {
+  max-width: 68ch;
+  line-height: 1.68;
+  color: var(--ink-2);
+}
+.prose-court p + p { margin-top: 1rem; }
+
+/* --- the file edge ------------------------------------------------------- */
+/* A record in a docket is keyed by a coloured edge, the way a tabbed legal file
+   is. It carries the outcome without spending a badge on every row. */
+
+.file-edge {
+  position: relative;
+  padding-left: 1rem;
+}
+.file-edge::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  border-radius: 999px;
+  background: var(--edge, var(--rule-strong));
+}
+
+/* --- the adversarial rule ------------------------------------------------ */
+/* The vertical line between the two sides of the room. It is the information
+   architecture of a dispute, so it is a real element rather than a border
+   utility scattered across components. */
+
+.split {
+  display: grid;
+  gap: 0;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 900px) {
+  .split {
+    grid-template-columns: 1fr 1px 1fr;
+  }
+  .split > .split-rule {
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      var(--rule-strong) 12%,
+      var(--rule-strong) 88%,
+      transparent
+    );
+  }
+}
+.split-rule { display: none; }
+@media (min-width: 900px) { .split-rule { display: block; } }
+
+/* --- controls ------------------------------------------------------------ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 7px;
+  font-weight: 560;
+  font-size: 0.925rem;
+  line-height: 1;
+  padding: 0.72rem 1.1rem;
+  transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease;
+  cursor: pointer;
+  border: 1px solid transparent;
+  text-align: center;
+}
+.btn:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+.btn-primary { background: var(--brand); color: #fff; }
+.btn-primary:hover:not(:disabled) { background: var(--brand-ink); }
+.btn-secondary {
+  background: var(--card);
+  color: var(--ink);
+  border-color: var(--rule-strong);
+}
+.btn-secondary:hover:not(:disabled) { border-color: var(--ink-3); }
+.btn-ghost { background: transparent; color: var(--brand); }
+.btn-ghost:hover:not(:disabled) { background: var(--brand-wash); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  box-shadow: var(--shadow-card);
+}
+
+.field {
+  width: 100%;
+  background: var(--card);
+  border: 1px solid var(--rule-strong);
+  border-radius: 7px;
+  padding: 0.7rem 0.8rem;
+  font-size: 0.95rem;
+  color: var(--ink);
+  font-family: inherit;
+}
+.field:focus {
+  outline: 2px solid var(--brand);
+  outline-offset: -1px;
+  border-color: var(--brand);
+}
+.field::placeholder { color: #a8a29e; }
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border-radius: 999px;
+  padding: 0.22rem 0.6rem;
+  font-size: 0.775rem;
+  font-weight: 600;
+  line-height: 1.3;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.link-quiet {
+  color: var(--ink-2);
+  text-decoration: underline;
+  text-decoration-color: var(--rule-strong);
+  text-underline-offset: 3px;
+}
+.link-quiet:hover { color: var(--ink); text-decoration-color: var(--ink-3); }
+
+.mono-addr {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 0.8em;
+  letter-spacing: -0.01em;
+}
+
+/* Nothing on this page moves unless a person asked it to, with one exception:
+   the verdict bar on a case that has been decided. That exception respects
+   this. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* --- the one orchestrated moment ----------------------------------------- */
+/* A decided case animates its award into place once, on load: the bar grows
+   along the scale and the marker settles on the point the jury chose. It is the
+   only motion on the site that a person did not trigger, and it exists because
+   WHERE the award landed inside its permitted window is the thing worth
+   noticing. Everything else is still. */
+
+@keyframes award-grow {
+  from { width: 0%; }
+}
+@keyframes award-settle {
+  0%   { transform: translate(-100%, -50%); opacity: 0; }
+  60%  { opacity: 1; }
+  100% { transform: translate(0, -50%); opacity: 1; }
+}
+.award-fill {
+  animation: award-grow 900ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+.award-mark {
+  animation: award-settle 900ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .award-fill, .award-mark { animation: none !important; }
+}
