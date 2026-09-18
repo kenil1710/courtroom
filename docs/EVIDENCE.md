@@ -14,9 +14,9 @@ Regenerate with `python3 tools/make_evidence.py`.
 
 | | address |
 |---|---|
-| CourtRoom — 48-hour windows | `0xB5380363256f78Bc1612b468513A989545d18898` |
-| CourtRoom — 5-minute windows, demo only | `0x727EDf834FAdD7aA5763cfBB526925535541370a` |
-| ArbitrationConsumer | `0x04605aCDB814715E1c39FCdcee52FdDbc57F9027` |
+| CourtRoom — 48-hour windows | `0x13248E8b62CF77756dB8B743D7B8a7A6BA6BBf1a` |
+| CourtRoom — 5-minute windows, demo only | `0x16EF19D8Bb009d0bB6a5Ba679E7Ac7Ba9B93B56c` |
+| ArbitrationConsumer | `0x5E661B9880026723d67f03e4589d33F2decE3Fe0` |
 
 Explorer: https://explorer-studio-dev.genlayer.com
 
@@ -78,22 +78,8 @@ responsible for: posting one well-formed transfer to the right party.
 
 | case | to | amount | transfer well formed | parent finalised |
 |---|---|---|---|---|
-| 1 | plaintiff1 | 2.6 GEN | yes | yes |
-| 2 | defendant2 | 1.3 GEN | yes | yes |
-| 3 | plaintiff3 | 1.5 GEN | yes | yes |
-| 3 | defendant3 | 2.6 GEN | yes | yes |
 | 4 | plaintiff4 | 0.1 GEN | yes | yes |
 | 4 | defendant4 | 0.8 GEN | yes | yes |
-| 5 | plaintiff5 | 0.7 GEN | yes | yes |
 | 2 | plaintiff2 | 0.1 GEN | yes | yes |
 | 1 | plaintiff1 | 0.1 GEN | yes | yes |
 
-## Notes from the run
-
-- settle_stalled(1) on a clean case → OK: 
-
-A refusal is a perfectly successful transaction carrying
-`{"status": "REJECTED"}`, and when the receipt does not expose that object the
-seed records `UNREADABLE` rather than `OK` — conflating the two is how a
-refusal gets written down as a success. `test/audit_chain.mjs` asserts the
-state those calls left behind instead.

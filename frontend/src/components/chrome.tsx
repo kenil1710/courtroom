@@ -111,7 +111,16 @@ export function NetworkBadge() {
   );
 }
 
-export function SiteFooter() {
+/**
+ * The footer.
+ *
+ * `network` is false on the landing page. The network badge is APP CHROME — it
+ * tells somebody who is about to sign something which chain they are on — and a
+ * visitor who has not decided they want an identity yet does not need it. The
+ * contract address stays either way, because that is provenance rather than
+ * chrome: it is how a reader checks that anything on the page is real.
+ */
+export function SiteFooter({ network = true }: { network?: boolean }) {
   return (
     <footer
       className="border-t mt-20 py-10"
@@ -157,8 +166,15 @@ export function SiteFooter() {
           className="mt-8 pt-5 border-t flex flex-wrap items-center gap-x-4 gap-y-2 text-[0.8rem] text-ivory-3"
           style={{ borderColor: "var(--rule)" }}
         >
-          <NetworkBadge />
-          <span className="mono-addr break-all">{COURT_ADDRESS}</span>
+          {network ? <NetworkBadge /> : <span>{CHAIN.name}</span>}
+          <a
+            href={addressUrl(COURT_ADDRESS)}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="mono-addr break-all link-quiet"
+          >
+            {COURT_ADDRESS}
+          </a>
         </div>
       </Shell>
     </footer>

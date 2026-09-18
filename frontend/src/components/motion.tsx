@@ -119,9 +119,16 @@ export function Reveal({
 /**
  * A page slides in from the right.
  *
- * `mode="wait"` is deliberately NOT used: it holds the outgoing page until its
- * exit finishes, which on a route that fetches from a testnet RPC means staring
- * at the old page for a second with nothing saying why.
+ * IT NEVER ANIMATES OPACITY. That is not a style choice — it is the fix for a
+ * real bug. With `initial={{ opacity: 0 }}` this wrapper renders every page at
+ * zero opacity until its animate step runs, and the not-found boundary is
+ * rendered by React outside the normal flow: its animate step never arrived, so
+ * `/case/999` served a completely blank page. Sliding from a visible start
+ * reads the same and cannot hide anything.
+ *
+ * `mode="wait"` is deliberately NOT used either: it holds the outgoing page
+ * until its exit finishes, which on a route that reads from a testnet RPC means
+ * staring at the old page for a second with nothing saying why.
  */
 export function PageTransition({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -131,8 +138,8 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
     <AnimatePresence initial={false}>
       <motion.div
         key={pathname}
-        initial={{ opacity: 0, x: 26 }}
-        animate={{ opacity: 1, x: 0 }}
+        initial={{ x: 26 }}
+        animate={{ x: 0 }}
         transition={{ duration: 0.34, ease: [0.22, 0.61, 0.36, 1] }}
       >
         {children}

@@ -13,9 +13,9 @@ judgment from it.
 
 | | |
 |---|---|
-| CourtRoom | [`0xB5380363256f78Bc1612b468513A989545d18898`](https://explorer-studio-dev.genlayer.com/address/0xB5380363256f78Bc1612b468513A989545d18898) |
-| CourtRoom, 5-minute deadlines (demo) | [`0x727EDf834FAdD7aA5763cfBB526925535541370a`](https://explorer-studio-dev.genlayer.com/address/0x727EDf834FAdD7aA5763cfBB526925535541370a) |
-| ArbitrationConsumer | [`0x04605aCDB814715E1c39FCdcee52FdDbc57F9027`](https://explorer-studio-dev.genlayer.com/address/0x04605aCDB814715E1c39FCdcee52FdDbc57F9027) |
+| CourtRoom | [`0x13248E8b62CF77756dB8B743D7B8a7A6BA6BBf1a`](https://explorer-studio-dev.genlayer.com/address/0x13248E8b62CF77756dB8B743D7B8a7A6BA6BBf1a) |
+| CourtRoom, 5-minute deadlines (demo) | [`0x16EF19D8Bb009d0bB6a5Ba679E7Ac7Ba9B93B56c`](https://explorer-studio-dev.genlayer.com/address/0x16EF19D8Bb009d0bB6a5Ba679E7Ac7Ba9B93B56c) |
+| ArbitrationConsumer | [`0x5E661B9880026723d67f03e4589d33F2decE3Fe0`](https://explorer-studio-dev.genlayer.com/address/0x5E661B9880026723d67f03e4589d33F2decE3Fe0) |
 
 ---
 
@@ -113,6 +113,7 @@ contracts/ArbitrationConsumer.py   a marketplace that defers to it
 contracts/NOTES.md                 why it is built this way, and what bit us
 test/test_logic.py                 645 offline tests — no chain, network or model
 test/seed.mjs                      creates the demo docket on Studio Dev
+test/rejudge.mjs                   re-summons the jury for an undecided case
 test/audit_chain.mjs               35 assertions against the LIVE contracts
 tools/audit.sh                     47 checks, one per past rejection
 tools/custody_scan.py              follows gl.message.value into storage

@@ -190,7 +190,7 @@ export default async function LandingPage() {
         </section>
       </main>
 
-      <SiteFooter />
+      <SiteFooter network={false} />
     </Motion>
   );
 }

@@ -29,16 +29,16 @@ export const CHAIN_PARAMS = {
 } as const;
 
 export const COURT_ADDRESS = (process.env.NEXT_PUBLIC_COURT_ADDRESS ??
-  "0xB5380363256f78Bc1612b468513A989545d18898") as `0x${string}`;
+  "0x13248E8b62CF77756dB8B743D7B8a7A6BA6BBf1a") as `0x${string}`;
 
 /** A second instance of the same contract with five-minute deadlines instead of
  *  48 hours, so the paths that only open once a deadline passes can be watched
  *  rather than only described. Documented on /docs. */
 export const FAST_COURT_ADDRESS = (process.env.NEXT_PUBLIC_FAST_COURT_ADDRESS ??
-  "0x727EDf834FAdD7aA5763cfBB526925535541370a") as `0x${string}`;
+  "0x16EF19D8Bb009d0bB6a5Ba679E7Ac7Ba9B93B56c") as `0x${string}`;
 
 export const CONSUMER_ADDRESS = (process.env.NEXT_PUBLIC_CONSUMER_ADDRESS ??
-  "0x04605aCDB814715E1c39FCdcee52FdDbc57F9027") as `0x${string}`;
+  "0x5E661B9880026723d67f03e4589d33F2decE3Fe0") as `0x${string}`;
 
 export const GITHUB = "https://github.com/kenil1710/courtroom";
 

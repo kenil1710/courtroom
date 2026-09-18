@@ -4,36 +4,36 @@
       "network": "studiodev",
       "chain_id": 61997,
       "CourtRoom": {
-        "address": "0xB5380363256f78Bc1612b468513A989545d18898",
-        "deploy_tx": "0x4f1bf372b48d6602507f08b427c1b5b8025f75833662f43671a94ac1204ee11f",
-        "source_bytes": 121461,
+        "address": "0x13248E8b62CF77756dB8B743D7B8a7A6BA6BBf1a",
+        "deploy_tx": "0xb7c40dd5b38ba2939aedfa596f4c5c4a2c74c77319b06a7c83841f468fde32b5",
+        "source_bytes": 122212,
         "owner": "0xD0cc53348e0E01D5356d7eA3Df0e217E7f67dFAe",
         "rubric_version": "1.0.0",
         "filing_fee_wei": "100000000000000000",
         "response_window_s": 172800,
         "stall_ttl_s": 172800,
-        "deployed_at": "2026-09-18T08:52:03.587Z"
+        "deployed_at": "2026-09-18T12:28:26.241Z"
       },
       "explorer": "https://explorer-studio-dev.genlayer.com/",
       "CourtRoomFast": {
-        "address": "0x727EDf834FAdD7aA5763cfBB526925535541370a",
-        "deploy_tx": "0x8fdd2e2a48bc8ddc29088d0d4ca5437a259e3b6da1a08f6a7b9b74fc8718fa5b",
-        "source_bytes": 121461,
+        "address": "0x16EF19D8Bb009d0bB6a5Ba679E7Ac7Ba9B93B56c",
+        "deploy_tx": "0xf15b5b98ddb9c3755d1f60ae16d32f89e6103b3ea751f39222d4b6c53de1b6d2",
+        "source_bytes": 122212,
         "owner": "0xD0cc53348e0E01D5356d7eA3Df0e217E7f67dFAe",
         "rubric_version": "1.0.0",
         "filing_fee_wei": "100000000000000000",
         "response_window_s": 300,
         "stall_ttl_s": 300,
-        "deployed_at": "2026-09-18T08:52:16.806Z"
+        "deployed_at": "2026-09-18T12:28:41.997Z"
       },
       "ArbitrationConsumer": {
-        "address": "0x04605aCDB814715E1c39FCdcee52FdDbc57F9027",
-        "deploy_tx": "0x23e205b79f7419580afa2f4cc16fad4f0d7eba45c12ebf63da820e53a67d74f8",
+        "address": "0x5E661B9880026723d67f03e4589d33F2decE3Fe0",
+        "deploy_tx": "0x1ab25416e7947918898ba2935d81bcad2edc07621c8010426a66936a26729404",
         "source_bytes": 36508,
-        "court": "0xB5380363256f78Bc1612b468513A989545d18898",
+        "court": "0x13248E8b62CF77756dB8B743D7B8a7A6BA6BBf1a",
         "owner": "0x70dB845cd660af9F7952011eCCe2E477Ae58ea76",
         "custody": false,
-        "deployed_at": "2026-09-18T08:52:36.270Z"
+        "deployed_at": "2026-09-18T12:28:59.330Z"
       }
     }
   }

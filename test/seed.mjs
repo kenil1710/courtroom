@@ -42,6 +42,16 @@ const read = createClient({ chain });
 const evidence = { network: networkName, court: COURT, fast: FAST, market: MARKET, ran_at: new Date().toISOString(), cases: [], fast_cases: [], marketplace: null, notes: [] };
 
 const log = (...a) => console.log(...a);
+
+/**
+ * Did that call do what it was asked?
+ *
+ * "OK" is the contract agreeing. "REUSED" is this script resuming a case an
+ * earlier run filed. "UNREADABLE" is the transaction settling with its return
+ * value not exposed by the receipt — which is the transport, not a refusal, and
+ * the case really was filed. Anything else is a genuine no.
+ */
+const worked = (r) => r.status === "OK" || r.status === "REUSED" || r.status === "UNREADABLE";
 const fail = (why) => { log(`  ✗ ${why}`); evidence.notes.push(why); };
 
 async function fund(role, amount = 60n * GEN) {
@@ -194,7 +204,7 @@ if (doMain) {
       filed = await call(COURT, spec.plaintiff, "file_case",
         [acc[spec.defendant].address, spec.claim, spec.evidence, String(spec.amount)], fee);
     }
-    if (filed.status !== "OK" && filed.status !== "REUSED") { fail(`${spec.key}: filing refused — ${filed.returned?.reason}`); continue; }
+    if (!worked(filed)) { fail(`${spec.key}: filing refused — ${filed.returned?.reason}`); continue; }
     const caseId = caseIdExisting || await caseIdFor(COURT, spec.plaintiff, spec, filed.returned);
     if (!caseId) { fail(`${spec.key}: filed but the case id could not be recovered`); continue; }
     const current = await view(COURT, "get_case", [caseId]);
@@ -208,7 +218,7 @@ if (doMain) {
       let answered = { status: "OK" };
       if (current.status === "FILED") answered = await call(COURT, spec.defendant, "respond",
         [caseId, spec.response, spec.counter, "0"], spec.amount);
-      if (answered.status !== "OK" && answered.status !== "UNREADABLE") { fail(`${spec.key}: answer refused — ${answered.returned?.reason}`); continue; }
+      if (!worked(answered)) { fail(`${spec.key}: answer refused — ${answered.returned?.reason}`); continue; }
       log(`    summoning the jury (leader + validators each call the model)…`);
       settled = await call(COURT, "bailiff", "judge", [caseId]);
     }
@@ -269,7 +279,7 @@ if (doFast && FAST) {
     } else {
       filed = await call(FAST, spec.plaintiff, "file_case",
         [acc[spec.defendant].address, spec.claim, spec.evidence, String(spec.amount)], fee);
-      if (filed.status !== "OK" && filed.status !== "UNREADABLE") { fail(`${spec.key}: filing refused — ${filed.returned?.reason}`); continue; }
+      if (!worked(filed)) { fail(`${spec.key}: filing refused — ${filed.returned?.reason}`); continue; }
       caseId = await caseIdFor(FAST, spec.plaintiff, spec, filed.returned);
     }
     if (!caseId) { fail(`${spec.key}: filed but the case id could not be recovered`); continue; }
@@ -374,10 +384,10 @@ if (doMarket && MARKET) {
 
   const reg = await call(MARKET, m.buyer, "register_order",
     [m.order_id, acc[m.buyer].address, acc[m.seller].address, String(m.amount), m.description]);
-  if (reg.status !== "OK" && reg.status !== "UNREADABLE") fail(`marketplace: register refused — ${reg.returned?.reason}`);
+  if (!worked(reg)) fail(`marketplace: register refused — ${reg.returned?.reason}`);
 
   const dis = await call(MARKET, m.buyer, "request_arbitration", [m.order_id, m.claim, m.evidence]);
-  if (dis.status !== "OK" && dis.status !== "UNREADABLE") fail(`marketplace: dispute refused — ${dis.returned?.reason}`);
+  if (!worked(dis)) fail(`marketplace: dispute refused — ${dis.returned?.reason}`);
   log(`    pinned filing digest ${dis.returned?.filing_digest}`);
 
   const filed = await call(COURT, m.buyer, "file_case",
@@ -391,7 +401,7 @@ if (doMarket && MARKET) {
   log(`    verified: ${JSON.stringify(linked.returned?.verified ?? linked.returned?.reason)}`);
 
   const answered = await call(COURT, m.seller, "respond", [caseId, m.response, m.counter, "0"], m.amount);
-  if (answered.status !== "OK") fail(`marketplace: answer refused — ${answered.returned?.reason}`);
+  if (!worked(answered)) fail(`marketplace: answer refused — ${answered.returned?.reason}`);
   log(`    summoning the jury…`);
   const judged = await call(COURT, "bailiff", "judge", [caseId]);
   const got = await view(COURT, "get_case", [caseId]);

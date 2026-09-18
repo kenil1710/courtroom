@@ -264,12 +264,18 @@ fi
 head "10. The live deploy"
 if [ "${1:-}" = "--chain" ]; then
   if [ -f deployments.json ] && [ -d test/node_modules ]; then
-    if OUT=$(node test/audit_chain.mjs 2>&1); then
-      printf '%s\n' "$OUT"
-      PASS=$((PASS + $(printf '%s' "$OUT" | grep -c '✔')))
+    OUT=$(node test/audit_chain.mjs 2>&1); RC=$?
+    printf '%s\n' "$OUT"
+    PASS=$((PASS + $(printf '%s' "$OUT" | grep -c '✔')))
+    CHAIN_FAILS=$(printf '%s' "$OUT" | grep -c '✗')
+    # A CRASH is a failure even though it prints no ✗ marks. Without this, a
+    # chain audit that threw before its first assertion reported "0 failed" and
+    # the whole run came back green — which is exactly how a real drift between
+    # the deployed contract and this repository went unnoticed once.
+    if [ "$RC" -ne 0 ] && [ "$CHAIN_FAILS" -eq 0 ]; then
+      bad "the on-chain audit exited $RC without completing"
     else
-      printf '%s\n' "$OUT"
-      FAIL=$((FAIL + $(printf '%s' "$OUT" | grep -c '✗')))
+      FAIL=$((FAIL + CHAIN_FAILS))
     fi
   else
     skip "on-chain assertions" "no deployments.json or test/node_modules"

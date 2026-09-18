@@ -40,6 +40,28 @@ async function retry(fn, attempts = 5) {
 const view = (fn, args = [], address = COURT) =>
   retry(() => read.readContract({ address, functionName: fn, args }));
 
+/*
+ * THE DEPLOYED SOURCE IS THE LOCAL SOURCE.
+ *
+ * This check exists because it caught a real drift: a consensus fix went into
+ * CourtRoom.py and the live contract was left on the previous build, so
+ * everything else in this file was cheerfully auditing a contract that was not
+ * the one in the repository. Every other assertion here is worthless if this
+ * one fails, so it runs first.
+ *
+ * `gen_getContractCode` errors on this node, so the comparison is against the
+ * byte length recorded at deploy time. That catches any edit at all: the fix
+ * that prompted this changed the file by 751 bytes.
+ */
+console.log("\n  — the live contracts are the ones in this repository —");
+for (const [name, rec] of Object.entries(deployed)) {
+  if (!rec?.address || !rec?.source_bytes) continue;
+  const file = name.startsWith("CourtRoom") ? "CourtRoom.py" : "ArbitrationConsumer.py";
+  const local = readFileSync(new URL(`contracts/${file}`, root)).length;
+  is(rec.source_bytes === local,
+     `${name} on chain is ${rec.source_bytes} bytes, ${file} on disk is ${local}`);
+}
+
 const cfg = await view("get_config");
 const stats = await view("get_stats");
 
